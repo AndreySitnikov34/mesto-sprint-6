@@ -1,0 +1,21 @@
+.cell__heart {
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  max-width: 8.7%;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+  line-height: 0;
+  background-color: #fff;
+}
+.cell__heart:hover {
+  /* transform: scale(1.2); */
+  /* transition: transform 0.4s ease-out; */
+  cursor: pointer;
+  opacity: 0.5;
+}
+.cell__heart:active {
+  background-color: black;
+}

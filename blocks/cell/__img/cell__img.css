@@ -1,0 +1,9 @@
+.cell__img {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    border-radius: 10px 10px 0 0;
+    /*box-shadow: 0 0 5px white;*/
+}

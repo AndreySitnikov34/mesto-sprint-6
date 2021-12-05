@@ -1,0 +1,13 @@
+.form__cells {
+  margin: 0;
+  padding: 0;
+  width: 358px;
+  outline: none;
+  border: 0;
+}
+@media (max-width: 901px) {
+  .form__cells {
+    width: 84%;
+    /* margin: 0; */
+  }
+}
