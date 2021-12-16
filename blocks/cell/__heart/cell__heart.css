@@ -1,12 +1,17 @@
 .cell__heart {
+  background-image: url("../../../images/heart-white.svg");
   cursor: pointer;
   margin: 0;
   padding: 0;
-  max-width: 8.7%;
+  height: 20px;
+  min-width: 22px;
   justify-content: center;
   align-items: center;
   outline: none;
   border: none;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
   line-height: 0;
   background-color: #fff;
 }
@@ -17,5 +22,16 @@
   opacity: 0.5;
 }
 .cell__heart:active {
-  background-color: black;
+  background-image: url("../../../images/heart-active.svg");
+  border: 1px solid red;
+
+}
+.cell__heart:active:hover {
+  opacity: 1;
+
+}
+.cell__heart_liked {
+  background-image: url("../../../images/heart-active.svg");
+  border: 2px dotted green;
+
 }

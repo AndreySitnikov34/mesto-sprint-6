@@ -7,3 +7,7 @@
     border-radius: 10px 10px 0 0;
     /*box-shadow: 0 0 5px white;*/
 }
+.cell__img:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}

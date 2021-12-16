@@ -8,7 +8,7 @@
   line-height: 0;
   border: none;
   outline: none;
-  background-image: url("../../../../images/cursor__pencil23.svg");
+  background-image: url("../../../images/cursor__pencil23.svg");
   background-size: cover;
   background-color: transparent;
   box-sizing: border-box;
@@ -23,7 +23,7 @@
 
 @media (max-width: 901px) {
   .user__info-edit-button {
-    background-image: url("../../../../images/cursor__pencil17.svg");
+    background-image: url("../../../images/cursor__pencil17.svg");
     width: 17px;
     height: 17px;
     margin: 5px 0 0 0;
