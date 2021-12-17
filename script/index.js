@@ -8,56 +8,93 @@ const userEditButton = document.querySelector('.user__info-edit-button');
 const userName = document.querySelector('.user__name');
 const userAbout = document.querySelector('.user__about');
 const cardAddButton = document.querySelector('.card__add-button');
-const popupPhoto = document.querySelector('.popup__photo-large');
-const popupPhotoCaption = document.querySelector('.popup__photo-caption');
-const imagelink = document.querySelector('.card__image');
-const cellImg = document.querySelector('.cell__img');
-// const cards = document.querySelector('.content');
-// const cell = document.querySelector('cell');
+const cards = document.querySelector('.content');
 const likeWithHeart = document.querySelector('.cell__heart');
 
-const addCard = (cardName) => {
-  return `
+const initialCards = [
+    {
+        cardName: 'Архыз',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+        cardName: 'Челябинская область',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+        cardName: 'Иваново',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+        cardName: 'Камчатка',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+        cardName: 'Холмогорский район',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+        cardName: 'Байкал',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+
+];
+
+console.log(initialCards);
+
+const addCard = (card) => {
+    const contentCard = `
   <article class="cell">
-        <div class="cell__subscribe">
-            <h2 class="cell__location">${cardName}</h2>
-            <button type="button" class="cell__heart">
-            </button>
-        </div>
-    </article>
+    <img src=${card.link} alt=${card.cardName} class="cell__img">
+    <button type="button" class="cell__del"></button>
+    <div class="cell__subscribe">
+      <h2 class="cell__location">${card.cardName}</h2>
+      <button type="button" class="cell__heart"></button>
+    </div>
+  </article>
   `;
-}
+    console.log(card);
+    cards.insertAdjacentHTML('beforeend', contentCard);
+};
+// initialCards.forEach(card => addCard(card));
+initialCards.forEach(addCard);
 
 function addToFavorite() {
     console.log('Лайк!');
-    // likeWithHeart.classList.toggle('cell__heart:active');
-    likeWithHeart.classList.toggle('cell__heart_liked');
+    // for (let i = 0; i < likeWithHeart.length; i++) {
+    //     likeWithHeart[i].addEventListener("click", addToFavorite);
+    // }
+    likeWithHeart.classList.toggle('.cell__heart_liked');
 }
 
-
-function formSubmitHandler(evt) {
-    evt.preventDefault();
+function formSubmitHandler(e) {
+    e.preventDefault();
     userName.textContent = formFirstCell.value;
     userAbout.textContent = formSecondCell.value;
     closePopup();
 }
 
-function openPopup() {
-    console.log('Сим-сим, откройся!');
+function addNewCard() {
+    console.log("addNewCard");
+}
+
+function editUser() {
+    console.log('editUser');
+}
+
+function openPopup(e) {
+    console.log('Сим-сим, откройся!', e.target, e.target.value);
     formFirstCell.value = userName.textContent;
     formSecondCell.value = userAbout.textContent;
+    cardAddButton.classList.toggle('popup-add-card');
     popupElement.classList.toggle('popup_opened');
+    popupElement.classList.remove('popup_fade_out');
+    popupElement.classList.add('popup_fade_in');
 }
 
 function closePopup() {
     popupElement.classList.toggle('popup_opened');
-}
-
-function showPhoto() {
-    openPopup(popupImage);
-    popupPhoto.src = imagelink.src;
-    popupPhoto.alt = imagelink.alt;
-    popupPhotoCaption.textContent = placeName.textContent;
+    popupElement.classList.remove('popup_fade_in');
+    popupElement.classList.add('popup_fade_out');
 }
 
 function keyUpHandler() {
@@ -66,17 +103,10 @@ function keyUpHandler() {
     }
 }
 
-
 window.addEventListener("keyup", keyUpHandler);
-userEditButton.addEventListener("click", openPopup);
-cardAddButton.addEventListener("click", openPopup);
+userEditButton.addEventListener("click", editUser);
+cardAddButton.addEventListener("click", addNewCard);
 formCloseButton.addEventListener("click", closePopup);
 formElement.addEventListener('submit', formSubmitHandler);
-imagelink.addEventListener('click', showPhoto);
-cellImg.addEventListener("click".openImage);
-likeWithHeart.addEventListener("click", addToFavorite);
-// function addSong(artistValue, titleValue) {
-//
-//     songElement.querySelector('.song__like').addEventListener('click', function (evt) {
-//         console.log(evt);
-//     });
+// likeWithHeart.addEventListener("click", addToFavorite);
+

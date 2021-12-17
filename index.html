@@ -27,68 +27,86 @@
             <button type="button" class="card__add-button"></button>
         </section>
         <section class="content">
-            <article class="cell">
-                <img
-                        src="images/Карачаевск.png"
-                        class="cell__img"
-                        alt="Карачаевск"
-                />
-                <div class="cell__subscribe">
-                    <h2 class="cell__location">Карачаевск</h2>
-                    <button type="button" class="cell__heart">
-                    </button>
-                </div>
-            </article>
-            <article class="cell">
-                <img src="images/Эльбрус.png" class="cell__img" alt="Эльбрус"/>
-                <div class="cell__subscribe">
-                    <h2 class="cell__location">Гора Эльбрус</h2>
-                    <button type="button" class="cell__heart">
-                    </button>
-                </div>
-            </article>
-            <article class="cell">
-                <img src="images/Домбай.png" class="cell__img" alt="Домбай"/>
-                <div class="cell__subscribe">
-                    <h2 class="cell__location">Домбай</h2>
-                    <button type="button" class="cell__heart">
-                    </button>
-                </div>
-            </article>
-            <article class="cell">
-                <img src="images/Эльбрус.png" class="cell__img" alt="Эльбрус"/>
-                <div class="cell__subscribe">
-                    <h2 class="cell__location">Гора Эльбрус</h2>
-                    <button type="button" class="cell__heart">
-                    </button>
-                </div>
-            </article>
-            <article class="cell">
-                <img src="images/Домбай.png" class="cell__img" alt="Домбай"/>
-                <div class="cell__subscribe">
-                    <h2 class="cell__location">Домбай</h2>
-                    <button type="button" class="cell__heart">
-                    </button>
-                </div>
-            </article>
-            <article class="cell">
-                <img
-                        src="images/Карачаевск.png"
-                        class="cell__img"
-                        alt="Карачаевск"
-                />
-                <div class="cell__subscribe">
-                    <h2 class="cell__location">Карачаево-Черкессия</h2>
-                    <button type="button" class="cell__heart">
-                    </button>
-                </div>
-            </article>
+<!--            <article class="cell">-->
+<!--                <img-->
+<!--                        src="images/Карачаевск.png"-->
+<!--                        class="cell__img"-->
+<!--                        alt="Карачаевск"-->
+<!--                />-->
+<!--                <button type="button" class="cell__del"></button>-->
+<!--                <div class="cell__subscribe">-->
+<!--                    <h2 class="cell__location">Карачаевск</h2>-->
+<!--                    <button type="button" class="cell__heart">-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </article>-->
+<!--            <article class="cell">-->
+<!--                <img src="images/Эльбрус.png" class="cell__img" alt="Эльбрус"/>-->
+<!--                <button type="button" class="cell__del"></button>-->
+<!--                <div class="cell__subscribe">-->
+<!--                    <h2 class="cell__location">Гора Эльбрус</h2>-->
+<!--                    <button type="button" class="cell__heart">-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </article>-->
+<!--            <article class="cell">-->
+<!--                <img src="images/Домбай.png" class="cell__img" alt="Домбай"/>-->
+<!--                <button type="button" class="cell__del"></button>-->
+<!--                <div class="cell__subscribe">-->
+<!--                    <h2 class="cell__location">Домбай</h2>-->
+<!--                    <button type="button" class="cell__heart">-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </article>-->
+<!--            <article class="cell">-->
+<!--                <img src="images/Эльбрус.png" class="cell__img" alt="Эльбрус"/>-->
+<!--                <button type="button" class="cell__del"></button>-->
+<!--                <div class="cell__subscribe">-->
+<!--                    <h2 class="cell__location">Гора Эльбрус</h2>-->
+<!--                    <button type="button" class="cell__heart">-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </article>-->
+<!--            <article class="cell">-->
+<!--                <img src="images/Домбай.png" class="cell__img" alt="Домбай"/>-->
+<!--                <button type="button" class="cell__del"></button>-->
+<!--                <div class="cell__subscribe">-->
+<!--                    <h2 class="cell__location">Домбай</h2>-->
+<!--                    <button type="button" class="cell__heart">-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </article>-->
+<!--            <article class="cell">-->
+<!--                <img-->
+<!--                        src="images/Карачаевск.png"-->
+<!--                        class="cell__img"-->
+<!--                        alt="Карачаевск"-->
+<!--                />-->
+<!--                <button type="button" class="cell__del"></button>-->
+<!--                <div class="cell__subscribe">-->
+<!--                    <h2 class="cell__location">Карачаево-Черкессия</h2>-->
+<!--                    <button type="button" class="cell__heart">-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </article>-->
+<!--            <article class="cell">-->
+<!--                <img-->
+<!--                        src="#"-->
+<!--                        class="cell__img"-->
+<!--                        alt="Название"-->
+<!--                />-->
+<!--                <button type="button" class="cell__del"></button>-->
+<!--                <div class="cell__subscribe">-->
+<!--                    <h2 class="cell__location"></h2>-->
+<!--                    <button type="button" class="cell__heart"></button>-->
+<!--                </div>-->
+<!--            </article>-->
         </section>
     </main>
     <footer class="footer">
         <div class="footer__copyright">© 2021 Mesto Russia</div>
     </footer>
-    <div class="popup">
+    <div class="popup-form-user popup">
         <div class="popup__container">
             <button type="button" class="popup__button-close"></button>
             <form class="form" name="form">
@@ -112,6 +130,37 @@
                 <button type="submit" class="form__submit-button">Сохранить</button>
             </form>
         </div>
+    </div>
+</div>
+<div class="popup-add-card popup">
+    <div class="popup__card">
+        <button type="button" class="popup__button-close"></button>
+        <form class="form" name="form">
+            <h2 class="form__heading">Новое место</h2>
+            <fieldset class="form__cells">
+                <input
+                        class="form__cell"
+                        type="text"
+                        id="cardName"
+                        value="Название"
+                        name="cardName"
+                />
+                <input
+                        class="form__cell"
+                        type="text"
+                        id="link"
+                        value="Ссылка на картинку"
+                        name="link"
+                />
+            </fieldset>
+            <button type="submit" class="form__submit-button">Сохранить</button>
+        </form>
+    </div>
+</div>
+<div class="popup-img popup">
+    <div class="popup__content">
+        <img class="popup__image" src="" alt="">
+        <button type="button" class="popup__close"></button>
     </div>
 </div>
 <script src="./script/index.js"></script>
