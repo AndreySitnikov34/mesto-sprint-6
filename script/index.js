@@ -1,13 +1,16 @@
 console.log('Поехали! © Ю.А.Гагарин')
 const popupElement = document.querySelector('.popup');
-const formFirstCell = popupElement.querySelector('#first-cell');
-const formSecondCell = popupElement.querySelector('#second-cell');
+// const formUserFirstCell = popupElement.querySelector('#first-cell-user');
+// const formUserSecondCell = popupElement.querySelector('#second-cell-user');
 const formElement = popupElement.querySelector('.form');
 const formCloseButton = popupElement.querySelector('.popup__button-close');
 const userEditButton = document.querySelector('.user__info-edit-button');
-const userName = document.querySelector('.user__name');
-const userAbout = document.querySelector('.user__about');
+// const userName = document.querySelector('.user__name');
+// const userAbout = document.querySelector('.user__about');
 const cardAddButton = document.querySelector('.card__add-button');
+const imageCell= document.querySelector('.card__add-button');
+const formCell= document.querySelector('.card__add-button');
+const = document.querySelector('.card__add-button');
 const cards = document.querySelector('.content');
 const likeWithHeart = document.querySelector('.cell__heart');
 
@@ -74,18 +77,19 @@ function formSubmitHandler(e) {
 }
 
 function addNewCard() {
-    console.log("addNewCard");
+    console.log("Добавить карточку", e.target, e.target.value);
+
 }
 
-function editUser() {
-    console.log('editUser');
-}
+// function editUser() {
+//     console.log('editUser');
+// }
 
 function openPopup(e) {
     console.log('Сим-сим, откройся!', e.target, e.target.value);
-    formFirstCell.value = userName.textContent;
-    formSecondCell.value = userAbout.textContent;
-    cardAddButton.classList.toggle('popup-add-card');
+    formUserFirstCell.value = userName.textContent;
+    formUserSecondCell.value = userAbout.textContent;
+    // cardAddButton.classList.toggle('popup-add-card');
     popupElement.classList.toggle('popup_opened');
     popupElement.classList.remove('popup_fade_out');
     popupElement.classList.add('popup_fade_in');
@@ -104,7 +108,7 @@ function keyUpHandler() {
 }
 
 window.addEventListener("keyup", keyUpHandler);
-userEditButton.addEventListener("click", editUser);
+userEditButton.addEventListener("click", openPopup);
 cardAddButton.addEventListener("click", addNewCard);
 formCloseButton.addEventListener("click", closePopup);
 formElement.addEventListener('submit', formSubmitHandler);
