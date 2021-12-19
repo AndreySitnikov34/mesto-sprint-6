@@ -1,4 +1,4 @@
-.cell__heart {
+.card__heart {
   background-image: url("../../../images/heart-white.svg");
   cursor: pointer;
   margin: 0;
@@ -15,22 +15,22 @@
   line-height: 0;
   background-color: #fff;
 }
-.cell__heart:hover {
+.card__heart:hover {
   /* transform: scale(1.2); */
   /* transition: transform 0.4s ease-out; */
   cursor: pointer;
   opacity: 0.5;
 }
-.cell__heart:active {
+.card__heart:active {
   background-image: url("../../../images/heart-active.svg");
   border: 1px solid red;
 
 }
-.cell__heart:active:hover {
+.card__heart:active:hover {
   opacity: 1;
 
 }
-.cell__heart_liked {
+.card__heart_liked {
   background-image: url("../../../images/heart-active.svg");
   /*border: 2px dotted green;*/
 

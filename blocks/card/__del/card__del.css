@@ -1,4 +1,4 @@
-.cell__del {
+.card__del {
     position: absolute;
     background-image: url("../../../images/delete.svg");
     background-color: transparent;
@@ -14,7 +14,7 @@
     border: none;
     background-repeat: no-repeat;
 }
-.cell__del:hover {
+.card__del:hover {
     cursor: pointer;
     opacity: 0.7;
 }

@@ -1,4 +1,4 @@
-.cell__img {
+.card__img {
     /*max-width: 100%;*/
     max-height: 100%;
     width: 100%;
@@ -7,7 +7,7 @@
     border-radius: 10px 10px 0 0;
     box-shadow: 0 0 1px white;
 }
-.cell__img:hover {
+.card__img:hover {
     cursor: pointer;
     opacity: 0.9;
 }

@@ -1,6 +1,6 @@
 # mesto-JS
 
-https://andreysitnikov34.github.io/mesto
+https://andreysitnikov34.github.io/mesto-JS
 
 Проектная работа "Mesto"
 
