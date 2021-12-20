@@ -15,8 +15,6 @@ const cardAddButton = document.querySelector('.card__add-button');
 const firstCellCard= document.querySelector('#first-cell-card');
 const secondCellCard= document.querySelector('#second-cell-card');
 const cards = document.querySelector('.content');
-const heartLike = document.querySelector('.card__heart');
-// let currentPopupElement;
 
 function addUserHandler(evt) {
     console.log("Обработчик юзера");
@@ -28,10 +26,7 @@ function addUserHandler(evt) {
 
 function addUser() {
     console.log("Редактировать юзера");
-    // formUserFirstCell.value = userName.textContent;
-    // formUserSecondCell.value = userAbout.textContent;
     popupFormUser.addEventListener('submit', addUserHandler);
-    // currentPopupElement = popupFormUser;
     popupFormUser.classList.remove('popup_fade_out');
     popupFormUser.classList.add('popup_fade_in');
 }
@@ -105,11 +100,7 @@ function addNewCardHandler (evt) {
 
 function addNewCard () {
     console.log("Добавить карточку");
-    // cardName.value = cardLocation.textContent;
-    // cardLink.value = cardLink.textContent;
     cardForm.addEventListener('submit', addNewCardHandler);
-    // currentPopupElement = cardFormPopup;
-    // openPopup();
     cardFormPopup.classList.remove('popup_fade_out');
     cardFormPopup.classList.add('popup_fade_in');
 }
@@ -134,6 +125,8 @@ function closePopup() {
     popupFormUser.classList.add('popup_fade_out');
     cardFormPopup.classList.remove('popup_fade_in');
     cardFormPopup.classList.add('popup_fade_out');
+    popupImage.classList.remove('popup_fade_in');
+    popupImage.classList.add('popup_fade_out');
 }
 
 function keyUpHandler() {
@@ -153,7 +146,6 @@ function imagePopup (evt) {
     imageOpen.src='';
     imageOpen.src=evt.target.src;
     imageOpen.alt=evt.target.alt;
-    // currentPopupElement = popupImage;
     popupImage.classList.remove('popup_fade_out');
     popupImage.classList.add('popup_fade_in');
     openPopup();
