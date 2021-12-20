@@ -4,6 +4,7 @@ const cardFormPopup = document.querySelector('.popup-form-card');
 const cardForm = document.querySelector('.popup-form-card');
 const popupImage = document.querySelector('.popup-image');
 const imageOpen = document.querySelector('.popup__image');
+const signImage = document.querySelector('.popup__image-location');
 const formUserFirstCell = popupFormUser.querySelector('#first-cell-user');
 const formUserSecondCell = popupFormUser.querySelector('#second-cell-user');
 const formUserElement = popupFormUser.querySelector('.form-user');
@@ -145,7 +146,7 @@ function imagePopup (evt) {
     popupImage.addEventListener('click',popupImageHandler);
     imageOpen.src='';
     imageOpen.src=evt.target.src;
-    imageOpen.alt=evt.target.alt;
+    signImage.alt=evt.target.alt;
     popupImage.classList.remove('popup_fade_out');
     popupImage.classList.add('popup_fade_in');
     openPopup();
