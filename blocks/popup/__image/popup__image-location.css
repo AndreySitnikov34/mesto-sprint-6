@@ -1,0 +1,11 @@
+.popup__image-location {
+    font-family: Inter, Arial, sans-serif;
+    color: #fff;
+    /*position: absolute;*/
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 10px auto 0;
+    box-shadow: 0 0 5px white;
+}

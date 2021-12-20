@@ -59,35 +59,36 @@
           </form>
         </div>
       </div>
-    <div class="popup-add-card popup">
-      <div class="popup__card">
-        <button type="button" class="popup__button-close"></button>
-        <form class="form" name="form">
+    <div class="popup popup-form-card">
+      <div class="popup__container">
+        <form class="form form-user" name="form">
           <h2 class="form__heading">Новое место</h2>
-          <fieldset class="form__cards">
+          <fieldset class="form__cells">
             <input
-              class="form__card"
+              class="form__cell"
               type="text"
-              id="cardName"
+              id="first-cell-card"
               value="Название"
-              name="cardName"
+              name="first-cell-card"
             />
             <input
-              class="form__card"
+              class="form__cell"
               type="text"
-              id="cardLink"
+              id="second-cell-card"
               value="Ссылка на картинку"
-              name="cardLink"
+              name="second-cell-card"
             />
           </fieldset>
           <button type="submit" class="form__submit-button">Создать</button>
+          <button type="button" class="popup__button-close"></button>
         </form>
       </div>
     </div>
-    <div class="popup-image popup">
+    <div class="popup popup-image">
       <div class="popup__content">
         <img class="popup__image" src="" alt="" />
-        <button type="button" class="popup__close"></button>
+        <button type="button" class="popup__image-close"></button>
+        <div class="popup__image-location">Текст под картинкой</div>
       </div>
     </div>
     <script src="./script/index.js"></script>

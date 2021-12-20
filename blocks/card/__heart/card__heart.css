@@ -23,7 +23,7 @@
 }
 .card__heart:active {
   background-image: url("../../../images/heart-active.svg");
-  border: 1px solid red;
+  /*border: 1px solid red;*/
 
 }
 .card__heart:active:hover {
@@ -32,6 +32,6 @@
 }
 .card__heart_liked {
   background-image: url("../../../images/heart-active.svg");
-  border: 2px dotted green;
+  /*border: 2px dotted green;*/
 
 }
