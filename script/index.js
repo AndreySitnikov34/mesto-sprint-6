@@ -1,17 +1,18 @@
 console.log('Поехали! © Ю.А.Гагарин')
-const popupUserElement = document.querySelector('.popup-form-user');
+const popupFormUser = document.querySelector('.popup-form-user');
 const cardFormPopup = document.querySelector('.popup-add-card');
 const cardForm = document.querySelector('.popup__card');
-const popupImage = document.querySelector('.popup__image');
-const formUserFirstCell = popupUserElement.querySelector('#first-cell-user');
-const formUserSecondCell = popupUserElement.querySelector('#second-cell-user');
-const formUserElement = popupUserElement.querySelector('.form-user');
-const formCloseButton = popupUserElement.querySelector('.popup__button-close');//?
+const popupImage = document.querySelector('.popup-image');
+const formUserFirstCell = popupFormUser.querySelector('#first-cell-user');
+const formUserSecondCell = popupFormUser.querySelector('#second-cell-user');
+const formUserElement = popupFormUser.querySelector('.form-user');
+const formCloseButton = popupFormUser.querySelector('.popup__button-close');//?
 const userEditButton = document.querySelector('.user__info-edit-button');//?
 const userName = document.querySelector('.user__name');
 const userAbout = document.querySelector('.user__about');
-const cardAddButton = document.querySelector('.card__add-button');//?
-const cardImage= document.querySelector('.card__img');
+const cardAddButton = document.querySelector('.card__add-button');
+const cardImage= document.querySelector('.popup__image');
+const cardLocation = document.querySelector('.card__location');
 const cardName= document.querySelector('#cardName');
 const cardLink= document.querySelector('#cardLink');
 const cards = document.querySelector('.content');
@@ -19,6 +20,7 @@ const heartLike = document.querySelector('.card__heart');
 let currentPopupElement;
 
 function addUserHandler(e) {
+    console.log("Обработчик юзера");
     e.preventDefault();
     userName.textContent = formUserFirstCell.value;
     userAbout.textContent = formUserSecondCell.value;
@@ -27,12 +29,12 @@ function addUserHandler(e) {
 
 function addUser() {
     console.log("Редактировать юзера");
-    formUserFirstCell.value = userName.textContent;
-    formUserSecondCell.value = userAbout.textContent;
-    popupUserElement.addEventListener('submit', addUserHandler);
-    // currentPopupElement = popupUserElement;
-    popupUserElement.classList.remove('popup_fade_out');
-    popupUserElement.classList.add('popup_fade_in');
+    // formUserFirstCell.value = userName.textContent;
+    // formUserSecondCell.value = userAbout.textContent;
+    popupFormUser.addEventListener('submit', addUserHandler);
+    currentPopupElement = popupFormUser;
+    popupFormUser.classList.remove('popup_fade_out');
+    popupFormUser.classList.add('popup_fade_in');
 }
 
 const initialCards = [
@@ -87,8 +89,10 @@ function setContent () {
     // initialCards.forEach(addCard);
 }
 
+setContent ()
+
 function addNewCardHandler (e) {
-    console.log("Нажать чтоб добавить открытку")
+    console.log("Обработчик карточки")
     e.preventDefault();
     addNewCard({
         cardName: cardName.value,
@@ -101,54 +105,64 @@ function addNewCardHandler (e) {
 
 function addNewCard () {
     console.log("Добавить карточку");
+    // cardName.value = cardLocation.textContent;
+    // cardLink.value = cardLink.textContent;
     cardForm.addEventListener('submit', addNewCardHandler);
     currentPopupElement = cardFormPopup;
-    openPopup();
+    // openPopup();
+    cardFormPopup.classList.remove('popup_fade_out');
+    cardFormPopup.classList.add('popup_fade_in');
 }
 
 function removeCard (e) {
+    console.log('GARBAGE!');
     e.target.parentNode.remove();
 }
 
 
 
-function addToFavorite(e) {
+function addToFavorite() {
     console.log('Лайк!');
     heartLike.classList.toggle('.card__heart_liked');
 }
 
-function openPopup(e) {
+function openPopup() {
     console.log('Сим-сим, откройся!');
 }
 
 function closePopup() {
     console.log('Сим-сим, закройся!');
-    popupUserElement.classList.remove('popup_fade_in');
-    popupUserElement.classList.add('popup_fade_out');
+    popupFormUser.classList.remove('popup_fade_in');
+    popupFormUser.classList.add('popup_fade_out');
 }
 
 function keyUpHandler() {
-    if ((currentPopupElement.classList.contains('popup_opened')) && (e.key === 'Escape')) {
+    if ((popupFormUser.classList.contains('popup_opened')) && (e.key === 'Escape')) {
         closePopup()
     }
 }
 
-function imagePopup (e) {
+function popupImageHandler(e) {
+    console.log('Обработчик картинки');
+    closePopup();
+}
+
+function imagePopup () {
     console.log("Открыть картинку в полный рост");
+    popupImage.addEventListener('click',popupImageHandler);
     cardImage.src='';
-    cardImage.src=e.target.src;
-    cardImage.alt=e.target.alt;
+    // cardImage.src=e.target.src;
+    // cardImage.alt=e.target.alt;
     currentPopupElement = popupImage;
     openPopup();
 }
-
-setContent ()
 
 window.addEventListener("keyup", keyUpHandler);
 cardAddButton.addEventListener("click", addNewCard);
 formCloseButton.addEventListener("click", closePopup);
 formUserElement.addEventListener('submit', openPopup);
 userEditButton.addEventListener('click', addUser);
+// heartLike.addEventListener('click', addToFavorite);
 document.querySelector('.card__add-button').addEventListener('click', addCard);
 document.querySelectorAll('.popup__button-close').forEach((element) => {element.addEventListener('click', closePopup)});
 
