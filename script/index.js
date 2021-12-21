@@ -1,56 +1,19 @@
 const popupFormUser = document.querySelector('.popup-form-user');
-const cardFormPopup = document.querySelector('.popup-form-card');
-const popupImage = document.querySelector('.popup-image');
-const imageOpen = document.querySelector('.popup__image');
-const signImage = document.querySelector('.popup__image-alt');
 const formUserFirstCell = popupFormUser.querySelector('#first-cell-user');
 const formUserSecondCell = popupFormUser.querySelector('#second-cell-user');
 const formUserElement = popupFormUser.querySelector('.form-user');
-const formCloseButton = popupFormUser.querySelector('.popup__button-close');//?
-const userEditButton = document.querySelector('.user__info-edit-button');//?
+const formCloseButton = popupFormUser.querySelector('.popup__button-close');
+const userEditButton = document.querySelector('.user__info-edit-button');
 const userName = document.querySelector('.user__name');
 const userAbout = document.querySelector('.user__about');
+const cardFormPopup = document.querySelector('.popup-form-card');
 const cardAddButton = document.querySelector('.card__add-button');
 const firstCellCard= document.querySelector('#first-cell-card');
 const secondCellCard= document.querySelector('#second-cell-card');
 const cards = document.querySelector('.content');
-
-function addUserHandler(evt) {
-    evt.preventDefault();
-    userName.textContent = formUserFirstCell.value;
-    userAbout.textContent = formUserSecondCell.value;
-    closePopup();
-}
-
-function addUser() {
-    popupFormUser.addEventListener('submit', addUserHandler);
-    openPopup(popupFormUser);
-}
-
-function addNewCardHandler (evt) {
-    evt.preventDefault();
-    addCard({
-        cardName: firstCellCard.value,
-        cardLink: secondCellCard.value
-    })
-    firstCellCard.value = firstCellCard.defaultValue;
-    secondCellCard.value = secondCellCard.defaultValue;
-    closePopup();
-}
-
-function addNewCard () {
-    cardFormPopup.addEventListener('submit', addNewCardHandler);
-    openPopup(cardFormPopup);
-}
-
-function imagePopup (evt) {
-    popupImage.addEventListener('click',closePopup);
-    imageOpen.src='';
-    imageOpen.src=evt.target.src;
-    imageOpen.alt=evt.target.alt;
-    signImage.textContent = evt.target.alt;
-    openPopup(popupImage);
-}
+const popupImage = document.querySelector('.popup-image');
+const imageOpen = document.querySelector('.popup__image');
+const signImage = document.querySelector('.popup__image-alt');
 
 const initialCards = [
     {
@@ -104,6 +67,43 @@ function setContent () {
 }
 
 setContent ()
+
+function addUserHandler(evt) {
+    evt.preventDefault();
+    userName.textContent = formUserFirstCell.value;
+    userAbout.textContent = formUserSecondCell.value;
+    closePopup();
+}
+
+function addUser() {
+    popupFormUser.addEventListener('submit', addUserHandler);
+    openPopup(popupFormUser);
+}
+
+function addNewCardHandler (evt) {
+    evt.preventDefault();
+    addCard({
+        cardName: firstCellCard.value,
+        cardLink: secondCellCard.value
+    })
+    firstCellCard.value = firstCellCard.defaultValue;
+    secondCellCard.value = secondCellCard.defaultValue;
+    closePopup();
+}
+
+function addNewCard () {
+    cardFormPopup.addEventListener('submit', addNewCardHandler);
+    openPopup(cardFormPopup);
+}
+
+function imagePopup (evt) {
+    popupImage.addEventListener('click',closePopup);
+    imageOpen.src='';
+    imageOpen.src=evt.target.src;
+    imageOpen.alt=evt.target.alt;
+    signImage.textContent = evt.target.alt;
+    openPopup(popupImage);
+}
 
 function removeCard (evt) {
     evt.target.parentNode.remove();
