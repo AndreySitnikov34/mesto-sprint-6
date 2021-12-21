@@ -4,7 +4,7 @@ const cardFormPopup = document.querySelector('.popup-form-card');
 const cardForm = document.querySelector('.popup-form-card');
 const popupImage = document.querySelector('.popup-image');
 const imageOpen = document.querySelector('.popup__image');
-const signImage = document.querySelector('.popup__image-location');
+const signImage = document.querySelector('.popup__image-alt');
 const formUserFirstCell = popupFormUser.querySelector('#first-cell-user');
 const formUserSecondCell = popupFormUser.querySelector('#second-cell-user');
 const formUserElement = popupFormUser.querySelector('.form-user');
@@ -117,15 +117,25 @@ function addToFavorite(evt) {
 }
 
 function openPopup() {
-    console.log('Сим-сим, откройся!');
+    console.log('Поп-ап, откройся!');
 }
 
 function closePopup() {
-    console.log('Сим-сим, закройся!');
+    console.log('Поп-ап, закройся!');
     popupFormUser.classList.remove('popup_fade_in');
     popupFormUser.classList.add('popup_fade_out');
     cardFormPopup.classList.remove('popup_fade_in');
     cardFormPopup.classList.add('popup_fade_out');
+    // popupImage.classList.remove('popup_fade_in');
+    // popupImage.classList.add('popup_fade_out');
+}
+
+function closeImagePopup() {
+    console.log('Картинка, закройся!');
+    // popupFormUser.classList.remove('popup_fade_in');
+    // popupFormUser.classList.add('popup_fade_out');
+    // cardFormPopup.classList.remove('popup_fade_in');
+    // cardFormPopup.classList.add('popup_fade_out');
     popupImage.classList.remove('popup_fade_in');
     popupImage.classList.add('popup_fade_out');
 }
@@ -138,7 +148,7 @@ function keyUpHandler() {
 
 function popupImageHandler() {
     console.log('Обработчик картинки');
-    closePopup();
+    closeImagePopup();
 }
 
 function imagePopup (evt) {
@@ -146,7 +156,8 @@ function imagePopup (evt) {
     popupImage.addEventListener('click',popupImageHandler);
     imageOpen.src='';
     imageOpen.src=evt.target.src;
-    signImage.alt=evt.target.alt;
+    imageOpen.alt=evt.target.alt;
+    // signImage.textContent = evt.target.cardName;
     popupImage.classList.remove('popup_fade_out');
     popupImage.classList.add('popup_fade_in');
     openPopup();
@@ -157,6 +168,6 @@ cardAddButton.addEventListener("click", addNewCard);
 formCloseButton.addEventListener("click", closePopup);
 formUserElement.addEventListener('submit', openPopup);
 userEditButton.addEventListener('click', addUser);
-popupImage.addEventListener('click', imagePopup);
+// popupImage.addEventListener('click', imagePopup);
 document.querySelectorAll('.popup__button-close').forEach((element) => {element.addEventListener('click', closePopup)});
 
