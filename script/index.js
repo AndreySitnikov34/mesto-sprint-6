@@ -1,4 +1,4 @@
-console.log('Поехали! © Ю.А.Гагарин')
+// console.log('Поехали! © Ю.А.Гагарин')
 const popupFormUser = document.querySelector('.popup-form-user');
 const cardFormPopup = document.querySelector('.popup-form-card');
 const cardForm = document.querySelector('.popup-form-card');
@@ -59,7 +59,6 @@ const initialCards = [
     }
 
 ];
-// console.log(initialCards);
 
 const addCard = (card) => {
     const contentCard = `
@@ -72,7 +71,7 @@ const addCard = (card) => {
     </div>
   </article>
   `;
-    console.log(card);
+    // console.log(card);
     cards.insertAdjacentHTML('afterbegin', contentCard);
     cards.querySelector('.card__img').addEventListener('click', imagePopup);
     cards.querySelector('.card__heart').addEventListener('click', addToFavorite);
@@ -151,7 +150,7 @@ function imagePopup (evt) {
     imageOpen.src='';
     imageOpen.src=evt.target.src;
     imageOpen.alt=evt.target.alt;
-    // signImage.textContent = evt.target.cardName;
+    signImage.textContent = evt.target.alt;
     popupImage.classList.remove('popup_fade_out');
     popupImage.classList.add('popup_fade_in');
     openPopup();
