@@ -68,14 +68,14 @@
               class="form__cell"
               type="text"
               id="first-cell-card"
-              value="Название"
+              placeholder="Название"
               name="first-cell-card"
             />
             <input
               class="form__cell"
               type="text"
               id="second-cell-card"
-              value="Ссылка на картинку"
+              placeholder="Ссылка на картинку"
               name="second-cell-card"
             />
           </fieldset>
@@ -87,10 +87,20 @@
     <div class="popup popup-image">
       <div class="popup__content">
         <img class="popup__image" src="" alt="" />
-        <button type="button" class="popup__image-close"></button>
+        <button type="button" class="popup__button-close"></button>
         <div class="popup__image-alt"></div>
       </div>
     </div>
+    <template id="card">
+            <li class="card">
+              <img class="card__img" src="" alt="">
+              <div class="card__subscribe">
+                <h2 class="card__location"></h2>
+                <button type="button" class="card__heart" data-id=""></button>
+              </div>
+              <div class="card__del"></div>
+            </li>
+          </template>
     <script src="./script/index.js"></script>
   </body>
 </html>
