@@ -1,12 +1,12 @@
 const popupFormUser = document.querySelector('.popup-form-user');
-const formUserFirstCell = popupFormUser.querySelector('#first-cell-user');
-const formUserSecondCell = popupFormUser.querySelector('#second-cell-user');
+const formUserNameInput = popupFormUser.querySelector('#first-cell-user');
+const formUserJobInput = popupFormUser.querySelector('#second-cell-user');
 const userName = document.querySelector('.user__name');
 const userAbout = document.querySelector('.user__about');
 const cardTemplate = document.querySelector('#card').content;
 const cardFormPopup = document.querySelector('.popup-form-card');
-const firstCellCard = document.querySelector('#first-cell-card');
-const secondCellCard = document.querySelector('#second-cell-card');
+const titleInputCard = document.querySelector('#first-cell-card');
+const linkInputCard = document.querySelector('#second-cell-card');
 const cards = document.querySelector('.content');
 const popupImage = document.querySelector('.popup-image');
 const imageOpen = document.querySelector('.popup__image');
@@ -63,10 +63,11 @@ function setContent () {
 
 setContent ()
 
-function handleOpenProfilePopup(evt) {
+function handleSubmitProfile(evt) {
     evt.preventDefault();
-    userName.textContent = formUserFirstCell.value;
-    userAbout.textContent = formUserSecondCell.value;
+    userName.textContent = formUserNameInput.value;
+    userAbout.textContent = formUserJobInput.value;
+    popupFormUser.classList.remove('popup_opened');
 }
 
 function openProfilePopup() {
@@ -77,11 +78,12 @@ function openProfilePopup() {
 function handleOpenCardPopup (evt) {
     evt.preventDefault();
     addCard({
-        name: firstCellCard.value,
-        link: secondCellCard.value
+        name: titleInputCard.value,
+        link: linkInputCard.value
     })
-    firstCellCard.value = '';
-    secondCellCard.value = '';
+    titleInputCard.value = '';
+    linkInputCard.value = '';
+    cardFormPopup.classList.remove('popup_opened');
 }
 
 function openCardPopup () {
@@ -106,17 +108,18 @@ function toggleLikes(evt) {
 }
 
 function openPopup(popup) {
-    // console.log("Открыт попап");
+    console.log("Открыт попап");
     popup.classList.add('popup_opened');
 }
 
 function closePopup(popup) {
-    // console.log("Закрыт попап");
+    console.log("Закрыт попап");
     popup.classList.remove('popup_opened');
 }
 
 document.querySelector('.card__add-button').addEventListener("click", openCardPopup);
 document.querySelector('.user__info-edit-button').addEventListener('click', openProfilePopup);
+document.querySelector('.form__submit-button').addEventListener('submit', () => closePopup());
 document
     .querySelectorAll('.popup__button-close')
     .forEach((element) => {
@@ -124,5 +127,5 @@ document
         element.addEventListener('click', () => closePopup(popup))
     });
 
-popupFormUser.addEventListener('submit', handleOpenProfilePopup);
+popupFormUser.addEventListener('submit', handleSubmitProfile);
 cardFormPopup.addEventListener('submit', handleOpenCardPopup);
