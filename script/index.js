@@ -67,7 +67,8 @@ function handleSubmitProfile(evt) {
     evt.preventDefault();
     userName.textContent = formUserNameInput.value;
     userAbout.textContent = formUserJobInput.value;
-    popupFormUser.classList.remove('popup_opened');
+    closePopup(popupFormUser);
+    // popupFormUser.classList.remove('popup_opened');
 }
 
 function openProfilePopup() {
@@ -83,7 +84,8 @@ function handleOpenCardPopup (evt) {
     })
     titleInputCard.value = '';
     linkInputCard.value = '';
-    cardFormPopup.classList.remove('popup_opened');
+    closePopup(cardFormPopup);
+    // cardFormPopup.classList.remove('popup_opened');
 }
 
 function openCardPopup () {
@@ -119,7 +121,6 @@ function closePopup(popup) {
 
 document.querySelector('.card__add-button').addEventListener("click", openCardPopup);
 document.querySelector('.user__info-edit-button').addEventListener('click', openProfilePopup);
-document.querySelector('.form__submit-button').addEventListener('submit', () => closePopup());
 document
     .querySelectorAll('.popup__button-close')
     .forEach((element) => {
