@@ -12,8 +12,6 @@ const popupImage = document.querySelector('.popup-image');
 const imageOpen = document.querySelector('.popup__image');
 const signImage = document.querySelector('.popup__image-alt');
 
-// let popup;
-
 const initialCards = [
     {
         name: 'Архыз',
@@ -47,8 +45,8 @@ function createCard(card) {
     cardElement.querySelector('.card__location').textContent = card.name;
     cardElement.querySelector('.card__img').src = card.link;
     cardElement.querySelector('.card__img').alt = card.name;
-    cardElement.querySelector('.card__img').addEventListener('click', imagePopup);
-    cardElement.querySelector('.card__heart').addEventListener('click', addToFavorite);
+    cardElement.querySelector('.card__img').addEventListener('click', openImagePopup);
+    cardElement.querySelector('.card__heart').addEventListener('click', toggleLikes);
     cardElement.querySelector('.card__del').addEventListener('click', removeCard);
     return cardElement
 }
@@ -65,19 +63,18 @@ function setContent () {
 
 setContent ()
 
-function addUserHandler(evt) {
+function handleOpenProfilePopup(evt) {
     evt.preventDefault();
     userName.textContent = formUserFirstCell.value;
     userAbout.textContent = formUserSecondCell.value;
-    closePopup();
 }
 
-function addUser() {
+function openProfilePopup() {
     // popupFormUser.addEventListener('submit', addUserHandler, {once: true});
     openPopup(popupFormUser);
 }
 
-function addNewCardHandler (evt) {
+function handleOpenCardPopup (evt) {
     evt.preventDefault();
     addCard({
         name: firstCellCard.value,
@@ -85,15 +82,14 @@ function addNewCardHandler (evt) {
     })
     firstCellCard.value = '';
     secondCellCard.value = '';
-    closePopup(popup);
 }
 
-function addNewCard () {
-    // cardFormPopup.addEventListener('submit', addNewCardHandler, {once: true});
+function openCardPopup () {
+    // cardFormPopup.addEventListener('submit', handleAddNewCard, {once: true});
     openPopup(cardFormPopup);
 }
 
-function imagePopup (evt) {
+function openImagePopup (evt) {
     imageOpen.src='';
     imageOpen.src=evt.target.src;
     imageOpen.alt=evt.target.alt;
@@ -105,7 +101,7 @@ function removeCard (evt) {
     evt.target.parentNode.remove();
 }
 
-function addToFavorite(evt) {
+function toggleLikes(evt) {
     evt.target.classList.toggle('card__heart_liked');
 }
 
@@ -114,19 +110,19 @@ function openPopup(popup) {
     popup.classList.add('popup_opened');
 }
 
-function closePopup() {
+function closePopup(popup) {
     // console.log("Закрыт попап");
-    // popup.classList.remove('popup_opened');
-    popupFormUser.classList.remove('popup_opened');
-    cardFormPopup.classList.remove('popup_opened');
-    popupImage.classList.remove('popup_opened');
+    popup.classList.remove('popup_opened');
 }
 
-document.querySelector('.card__add-button').addEventListener("click", addNewCard);
-document.querySelector('.user__info-edit-button').addEventListener('click', addUser);
+document.querySelector('.card__add-button').addEventListener("click", openCardPopup);
+document.querySelector('.user__info-edit-button').addEventListener('click', openProfilePopup);
 document
     .querySelectorAll('.popup__button-close')
-    .forEach((element) => element.addEventListener('click', closePopup));
+    .forEach((element) => {
+        const popup = element.closest('.popup')
+        element.addEventListener('click', () => closePopup(popup))
+    });
 
-popupFormUser.addEventListener('submit', addUserHandler);
-cardFormPopup.addEventListener('submit', addNewCardHandler);
+popupFormUser.addEventListener('submit', handleOpenProfilePopup);
+cardFormPopup.addEventListener('submit', handleOpenCardPopup);
