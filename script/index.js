@@ -108,12 +108,12 @@ function toggleLikes(evt) {
 }
 
 function openPopup(popup) {
-    console.log("Открыт попап");
+    // console.log("Открыт попап");
     popup.classList.add('popup_opened');
 }
 
 function closePopup(popup) {
-    console.log("Закрыт попап");
+    // console.log("Закрыт попап");
     popup.classList.remove('popup_opened');
 }
 
