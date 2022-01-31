@@ -131,7 +131,7 @@ function closePopup(popup) {
            closePopup(popupImage);
         } console.log("Закрыт попап по Escape");
     })
-git chekout
+
 // Функция закрытия попапа FormUser по клику вне попапа
 
 function closeFormUser(popup) {

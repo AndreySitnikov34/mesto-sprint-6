@@ -1,12 +1,12 @@
 # mesto-JS
 
-https://andreysitnikov34.github.io/mesto-JS
+https://andreysitnikov34.github.io/mesto-sprint-6
 
 Проектная работа "Mesto"
 
 ## copyright
 
-Студента Яндекс-Практикума, курса #007. 2021 год. Декабрь.
+Студента Яндекс-Практикума, курса #007. 2022 год. Февраль.
 
 ### technique
 
