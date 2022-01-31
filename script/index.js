@@ -110,14 +110,72 @@ function toggleLikes(evt) {
 }
 
 function openPopup(popup) {
-    // console.log("Открыт попап");
+    console.log("Открыт попап");
     popup.classList.add('popup_opened');
 }
 
+// Функция закрытия попапа
+
 function closePopup(popup) {
-    // console.log("Закрыт попап");
+    console.log("Закрыт попап");
     popup.classList.remove('popup_opened');
 }
+
+// Функция закрытия попапа по Escape
+
+    document.addEventListener('keydown', (evt) => {
+        if (evt.key === 'Escape') {
+            console.log("evt.key");
+           closePopup(popupFormUser);
+           closePopup(cardFormPopup);
+           closePopup(popupImage);
+        } console.log("Закрыт попап по Escape");
+    })
+git chekout
+// Функция закрытия попапа FormUser по клику вне попапа
+
+function closeFormUser(popup) {
+    popup.addEventListener('click', (evt) => {
+        if (evt.target === popupFormUser) {
+            closePopup(popup);
+        } 
+        else {
+            return
+        }
+    })
+}
+
+closeFormUser(popupFormUser)
+
+// Функция закрытия попапа добавления карточки по клику вне попапа
+
+function closeFormAddCard(popup) {
+    popup.addEventListener('click', (evt) => {
+        if (evt.target === cardFormPopup) {
+            closePopup(popup);
+        } 
+        else {
+            return
+        }
+    })
+}
+
+closeFormAddCard(cardFormPopup)
+
+// Функция закрытия попапа фото по клику вне фото
+
+function closeFoto(popup) {
+    popup.addEventListener('click', (evt) => {
+        if (evt.target === popupImage) {
+            closePopup(popup);
+        } 
+        else {
+            return
+        }
+    })
+}
+
+closeFoto(popupImage)
 
 document.querySelector('.card__add-button').addEventListener("click", openCardPopup);
 document.querySelector('.user__info-edit-button').addEventListener('click', openProfilePopup);
