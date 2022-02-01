@@ -123,14 +123,25 @@ function closePopup(popup) {
 
 // Функция закрытия попапа по Escape
 
-    document.addEventListener('keydown', (evt) => {
-        if (evt.key === 'Escape') {
-            console.log("evt.key");
-           closePopup(popupFormUser);
-           closePopup(cardFormPopup);
-           closePopup(popupImage);
-        } console.log("Закрыт попап по Escape");
-    })
+    // document.addEventListener('keydown', (evt) => {
+    //     if (evt.key === 'Escape') {
+    //         console.log("evt.key");
+    //        closePopup(popupFormUser);
+    //        closePopup(cardFormPopup);
+    //        closePopup(popupImage);
+    //     } console.log("Закрыт попап по Escape");
+    // })
+
+// Функция закрытия попапа по Escape v2.0
+
+window.addEventListener('keydown', closePopEsc);
+function closePopEsc(key) {
+    if (key.key === 'Escape') {
+        console.log("Escape press!");
+        const pup = document.querySelectorAll('.popup');
+        pup.forEach(popup => {closePopup(popup);});
+    }
+}
 
 // Функция закрытия попапа FormUser по клику вне попапа
 
