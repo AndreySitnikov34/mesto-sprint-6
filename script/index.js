@@ -1,8 +1,11 @@
 const popupFormUser = document.querySelector('.popup-form-user');
+const popupFormAvatar = document.querySelector('.popup-form-avatar');
+const avatarLink = document.querySelector('#avatar-link');
 const formUserNameInput = popupFormUser.querySelector('#first-cell-user');
-const formUserJobInput = popupFormUser.querySelector('#second-cell-user');
+const formUserAboutInput = popupFormUser.querySelector('#second-cell-user');
 const userName = document.querySelector('.user__name');
 const userAbout = document.querySelector('.user__about');
+const userPic = document.querySelector('.user__pic');
 const cardTemplate = document.querySelector('#card').content;
 const cardFormPopup = document.querySelector('.popup-form-card');
 const titleInputCard = document.querySelector('#first-cell-card');
@@ -13,6 +16,18 @@ const imageOpen = document.querySelector('.popup__image');
 const signImage = document.querySelector('.popup__image-alt');
 
 const initialCards = [
+    {
+        name: 'Санкт-Петербург',
+        link: 'https://images.unsplash.com/photo-1597533849860-5a04a21a7b3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
+    },
+    {
+        name: 'МОСКВА',
+        link: 'https://images.unsplash.com/photo-1613327345946-551b8ecf2afe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
+    },
+    {
+        name: 'Волгоград',
+        link: 'https://images.unsplash.com/photo-1583917096279-3eb6e3ea978f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2564&q=80'
+    },
     {
         name: 'Архыз',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -36,8 +51,7 @@ const initialCards = [
     {
         name: 'Байкал',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-
+    }    
 ];
 
 function createCard(card) {
@@ -58,38 +72,46 @@ const addCard = (card) => {
 
 function setContent () {
     initialCards.forEach(content => addCard(content));
-    // initialCards.forEach(addCard);
 }
 
 setContent ()
 
-function handleSubmitProfile(evt) {
-    evt.preventDefault();
-    userName.textContent = formUserNameInput.value;
-    userAbout.textContent = formUserJobInput.value;
-    closePopup(popupFormUser);
-    // popupFormUser.classList.remove('popup_opened');
+function openAvatarPopup() {
+    openPopup(popupFormAvatar);
+}
+
+function handleAvatarPopup (evt) { // Функция обработки смены аватара
+    console.log("Нажат submit");
+    evt.preventDefault(); // Не открывать в новом окне (сброс значений по умолчанию)
+    userPic.src = avatarLink.value; // Заменить значение src
+    closePopup(popupFormAvatar); // Закрыть попап
+}
+// const ava=document.getElementById('avatar-pic');
+// ava.src=ava.src.replace(/images/JCousteau.png, "");
+
+function handleSubmitProfile(evt) { //Функция обработки профиля юзера после submit
+    evt.preventDefault(); // Не открывать в новом окне
+    userName.textContent = formUserNameInput.value; // Присвоить name значение из формы
+    userAbout.textContent = formUserAboutInput.value; // Присвоить about значение из формы 
+    closePopup(popupFormUser); // Закрыть попап
 }
 
 function openProfilePopup() {
-    // popupFormUser.addEventListener('submit', addUserHandler, {once: true});
     openPopup(popupFormUser);
 }
 
-function handleOpenCardPopup (evt) {
-    evt.preventDefault();
+function handleOpenCardPopup (evt) { // Функция обработки создания новой карточки
+    evt.preventDefault(); // Не открывать в новом окне
     addCard({
         name: titleInputCard.value,
         link: linkInputCard.value
     })
     titleInputCard.value = '';
     linkInputCard.value = '';
-    closePopup(cardFormPopup);
-    // cardFormPopup.classList.remove('popup_opened');
+    closePopup(cardFormPopup); // Закрыть попап
 }
 
 function openCardPopup () {
-    // cardFormPopup.addEventListener('submit', handleAddNewCard, {once: true});
     openPopup(cardFormPopup);
 }
 
@@ -143,6 +165,21 @@ function closePopEsc(key) {
     }
 }
 
+// Функция закрытия попапа FormAvatar по клику вне попапа
+
+function closeFormAvatar(popup) {
+    popup.addEventListener('click', (evt) => {
+        if (evt.target === popupFormAvatar) {
+            closePopup(popup);
+        } 
+        else {
+            return
+        }
+    })
+}
+
+closeFormAvatar(popupFormAvatar)
+
 // Функция закрытия попапа FormUser по клику вне попапа
 
 function closeFormUser(popup) {
@@ -188,6 +225,7 @@ function closeFoto(popup) {
 
 closeFoto(popupImage)
 
+document.querySelector('.user__overlay').addEventListener("click", openAvatarPopup);
 document.querySelector('.card__add-button').addEventListener("click", openCardPopup);
 document.querySelector('.user__info-edit-button').addEventListener('click', openProfilePopup);
 document
@@ -197,5 +235,6 @@ document
         element.addEventListener('click', () => closePopup(popup))
     });
 
+popupFormAvatar.addEventListener('submit', handleAvatarPopup);
 popupFormUser.addEventListener('submit', handleSubmitProfile);
 cardFormPopup.addEventListener('submit', handleOpenCardPopup);

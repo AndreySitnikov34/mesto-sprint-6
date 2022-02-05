@@ -9,16 +9,27 @@
   <body class="body">
     <div class="page">
       <header class="header">
-        <img class="header__logo" src="./images/mesto.svg" alt="Логотип">
+        <img class="header__logo" src="./images/mesto.svg" alt="Логотип" />
       </header>
       <main class="main">
         <section class="user">
-          <img
-            src="images/JCousteau.png"
-            data-title="Жак-Ив Кусто"
-            class="user__pic"
-            alt="Жак-Ив Кусто"
-          />
+          <div class="user__container">
+            <img
+              src="images/JCousteau.png"
+              data-title="Жак-Ив Кусто"
+              id="avatar-pic"
+              class="user__pic"
+              alt="Жак-Ив Кусто"
+            />
+            <div class="user__overlay">
+              <a
+                href="images/Vector.svg"
+                class="user__edit-icon"
+                title="User Profile"
+              >
+              </a>
+            </div>
+          </div>
           <div class="user__info">
             <h1 class="user__name">Жак-Ив Кусто</h1>
             <button type="button" class="user__info-edit-button"></button>
@@ -31,34 +42,52 @@
         </section>
       </main>
       <footer class="footer">
-        <div class="footer__copyright">© 2021 Mesto Russia</div>
+        <div class="footer__copyright">© 2022 Mesto Russia</div>
       </footer>
     </div>
-    <div class="popup popup-form-user">
-        <div class="popup__container">
-          <form class="form form-user" name="form">
-            <h2 class="form__heading">Редактировать профиль</h2>
-            <fieldset class="form__cells">
-              <input
-                class="form__cell"
-                type="text"
-                id="first-cell-user"
-                value="Жак-Ив Кусто"
-                name="first-cell-user"
-              />
-              <input
-                class="form__cell"
-                type="text"
-                id="second-cell-user"
-                value="Исследователь океана"
-                name="second-cell-user"
-              />
-            </fieldset>
-            <button type="submit" class="form__submit-button">Сохранить</button>
-            <button type="button" class="popup__button-close"></button>
-          </form>
-        </div>
+    <div class="popup popup-form-avatar">
+      <div class="popup__container">
+        <form class="form form-user" name="form">
+          <h2 class="form__heading">Обновить аватар</h2>
+          <fieldset class="form__cells">
+            <input
+              class="form__cell"
+              type="text"
+              id="avatar-link"
+              placeholder="Ссылка на изображение"
+              name="avatar-link"
+            />
+          </fieldset>
+          <button type="submit" class="form__submit-button">Сохранить</button>
+          <button type="button" class="popup__button-close"></button>
+        </form>
       </div>
+    </div>
+    <div class="popup popup-form-user">
+      <div class="popup__container">
+        <form class="form form-user" name="form">
+          <h2 class="form__heading">Редактировать профиль</h2>
+          <fieldset class="form__cells">
+            <input
+              class="form__cell"
+              type="text"
+              id="first-cell-user"
+              value="Жак-Ив Кусто"
+              name="first-cell-user"
+            />
+            <input
+              class="form__cell"
+              type="text"
+              id="second-cell-user"
+              value="Исследователь океана"
+              name="second-cell-user"
+            />
+          </fieldset>
+          <button type="submit" class="form__submit-button">Сохранить</button>
+          <button type="button" class="popup__button-close"></button>
+        </form>
+      </div>
+    </div>
     <div class="popup popup-form-card">
       <div class="popup__container">
         <form class="form form-user" name="form">
@@ -92,15 +121,18 @@
       </div>
     </div>
     <template id="card">
-            <li class="card">
-              <img class="card__img" src="" alt="">
-              <div class="card__subscribe">
-                <h2 class="card__location"></h2>
-                <button type="button" class="card__heart" data-id=""></button>
-              </div>
-              <div class="card__del"></div>
-            </li>
-          </template>
+      <li class="card">
+        <img class="card__img" src="" alt="" />
+        <div class="card__subscribe">
+          <h2 class="card__location"></h2>
+          <div class="card__like">
+            <button type="button" class="card__heart" data-id=""></button>
+            <span class="card__heart-count">0</span>
+          </div>
+        </div>
+        <div class="card__del"></div>
+      </li>
+    </template>
     <script src="./script/index.js"></script>
   </body>
 </html>
