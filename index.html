@@ -47,68 +47,95 @@
     </div>
     <div class="popup popup-form-avatar">
       <div class="popup__container">
-        <form class="form form-user" name="form">
+        <form class="form form-avatar" name="form" novalidate>
           <h2 class="form__heading">Обновить аватар</h2>
-          <fieldset class="form__cells">
+          <fieldset class="form__set form__set-avatar">
             <input
-              class="form__cell"
-              type="text"
-              id="avatar-link"
+              class="form__input form__input-avatar"
+              type="url"
+              id="url-input"
               placeholder="Ссылка на изображение"
-              name="avatar-link"
+              name="url-input"
             />
+            <span class="url-input-error form__input-error"
+              >Вы пропустили это поле</span
+            >
           </fieldset>
-          <button type="submit" class="form__submit-button">Сохранить</button>
+          <button type="submit" class="form__submit button button-avatar">
+            Сохранить
+          </button>
           <button type="button" class="popup__button-close"></button>
         </form>
       </div>
     </div>
     <div class="popup popup-form-user">
       <div class="popup__container">
-        <form class="form form-user" name="form">
+        <form class="form" name="form" novalidate>
           <h2 class="form__heading">Редактировать профиль</h2>
-          <fieldset class="form__cells">
+          <fieldset class="form__set">
             <input
-              class="form__cell"
+              class="form__input"
               type="text"
-              id="first-cell-user"
+              id="name-input"
               value="Жак-Ив Кусто"
-              name="first-cell-user"
+              name="name-input"
+              minlength="2"
+              maxlength="30"
+              required
             />
+            <span class="name-input-error form__input-error" id="name-input"
+              >Вы пропустили это поле</span
+            >
             <input
-              class="form__cell"
+              class="form__input"
               type="text"
-              id="second-cell-user"
+              id="job-input"
               value="Исследователь океана"
-              name="second-cell-user"
+              name="job-input"
+              minlength="2"
+              maxlength="200"
+              required
             />
+            <span class="job-input-error form__input-error" id="job-input"
+              >Вы пропустили это поле</span
+            >
           </fieldset>
-          <button type="submit" class="form__submit-button">Сохранить</button>
+          <button type="submit" class="form__submit button">Сохранить</button>
           <button type="button" class="popup__button-close"></button>
         </form>
       </div>
     </div>
     <div class="popup popup-form-card">
       <div class="popup__container">
-        <form class="form form-user" name="form">
+        <form class="form" name="form" novalidate>
           <h2 class="form__heading">Новое место</h2>
-          <fieldset class="form__cells">
+          <fieldset class="form__set">
             <input
-              class="form__cell"
+              class="form__input"
               type="text"
-              id="first-cell-card"
+              id="text-input"
               placeholder="Название"
-              name="first-cell-card"
+              name="text-input"
+              minlength="2"
+              maxlength="30"
+              required
             />
+            <span class="text-input-error form__input-error" id="text-input"
+              >Вы пропустили это поле</span
+            >
             <input
-              class="form__cell"
-              type="text"
-              id="second-cell-card"
+              class="form__input"
+              type="url"
+              id="url-input"
               placeholder="Ссылка на картинку"
-              name="second-cell-card"
+              name="url-input"
+              required
             />
+            <span class="url-input-error form__input-error" id="url-input"
+              >Вы пропустили это поле</span
+            >
           </fieldset>
-          <button type="submit" class="form__submit-button">Создать</button>
+          <button type="submit" class="form__submit button">Создать</button>
           <button type="button" class="popup__button-close"></button>
         </form>
       </div>

@@ -1,15 +1,15 @@
 const popupFormUser = document.querySelector('.popup-form-user');
 const popupFormAvatar = document.querySelector('.popup-form-avatar');
-const avatarLink = document.querySelector('#avatar-link');
-const formUserNameInput = popupFormUser.querySelector('#first-cell-user');
-const formUserAboutInput = popupFormUser.querySelector('#second-cell-user');
+const avatarLink = document.querySelector('#url-input');
+const formUserNameInput = popupFormUser.querySelector('#name-input');
+const formUserAboutInput = popupFormUser.querySelector('#job-input');
 const userName = document.querySelector('.user__name');
 const userAbout = document.querySelector('.user__about');
 const userPic = document.querySelector('.user__pic');
 const cardTemplate = document.querySelector('#card').content;
 const cardFormPopup = document.querySelector('.popup-form-card');
-const titleInputCard = document.querySelector('#first-cell-card');
-const linkInputCard = document.querySelector('#second-cell-card');
+const titleInputCard = document.querySelector('#text-input');
+const linkInputCard = document.querySelector('#url-input');
 const cards = document.querySelector('.content');
 const popupImage = document.querySelector('.popup-image');
 const imageOpen = document.querySelector('.popup__image');
@@ -81,7 +81,7 @@ function openAvatarPopup() {
 }
 
 function handleAvatarPopup (evt) { // Функция обработки смены аватара
-    console.log("Нажат submit");
+    console.log("Нажат submit смены аватара");
     evt.preventDefault(); // Не открывать в новом окне (сброс значений по умолчанию)
     userPic.src = avatarLink.value; // Заменить значение src
     closePopup(popupFormAvatar); // Закрыть попап
@@ -90,6 +90,7 @@ function handleAvatarPopup (evt) { // Функция обработки смен
 // ava.src=ava.src.replace(/images/JCousteau.png, "");
 
 function handleSubmitProfile(evt) { //Функция обработки профиля юзера после submit
+    console.log("Нажат submit смены имени юзера");
     evt.preventDefault(); // Не открывать в новом окне
     userName.textContent = formUserNameInput.value; // Присвоить name значение из формы
     userAbout.textContent = formUserAboutInput.value; // Присвоить about значение из формы 
@@ -101,6 +102,7 @@ function openProfilePopup() {
 }
 
 function handleOpenCardPopup (evt) { // Функция обработки создания новой карточки
+    console.log("Нажат submit создания новой карточки");
     evt.preventDefault(); // Не открывать в новом окне
     addCard({
         name: titleInputCard.value,
@@ -148,6 +150,7 @@ function closePopup(popup) {
     // document.addEventListener('keydown', (evt) => {
     //     if (evt.key === 'Escape') {
     //         console.log("evt.key");
+    //         closePopup(popupFormAvatar);
     //        closePopup(popupFormUser);
     //        closePopup(cardFormPopup);
     //        closePopup(popupImage);
@@ -238,3 +241,123 @@ document
 popupFormAvatar.addEventListener('submit', handleAvatarPopup);
 popupFormUser.addEventListener('submit', handleSubmitProfile);
 cardFormPopup.addEventListener('submit', handleOpenCardPopup);
+
+//=====================   Валидация. Вариант 1  ========================
+
+const showInputError = (formElement, inputElement, errorMessage) => {
+    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.add('form__input_type_error');
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add('form__input-error_active');
+};
+
+const hideInputError = (formElement, inputElement) => {
+    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.remove('form__input_type_error');
+    errorElement.classList.remove('form__input-error_active');
+    errorElement.textContent = '';
+};
+
+const isValid = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+};
+
+const hasInvalidInput = (inputList) => {
+  // Шаримся по массиву методом some в поисках валидности
+  return inputList.some((inputElement) => {
+    // Если поле не валидно, колбэк вернёт true
+    return !inputElement.validity.valid;
+  })
+};
+
+const toggleButtonState = (inputList, buttonElement) => {
+  // Если есть хотя бы один невалидный инпут
+  if (hasInvalidInput(inputList)) {
+    // добавить кнопке класс неактивности
+    buttonElement.classList.add('form__submit_inactive');
+  } else {
+    // иначе сделай кнопку активной
+    buttonElement.classList.remove('form__submit_inactive');
+  }
+};
+
+const setEventListeners = (formElement) => {
+  // Находим ВСЕ поля внутри формы, делаем из них массив методом Array.from
+  const inputList = Array.from(formElement.querySelectorAll('.form__input'));
+  const buttonElement = formElement.querySelector('.form__submit');
+    // Вызовем toggleButtonState, чтобы не ждать ввода данных в поля
+  toggleButtonState(inputList, buttonElement);
+
+  // Обходм все элементы полученной коллекции
+  inputList.forEach((inputElement) => {
+    // каждому полю добавляем обработчик события input
+    inputElement.addEventListener('input', () => {
+      // Внутри колбэка вызываем isValid, передав ей форму и проверяемый элемент
+      isValid(formElement, inputElement);
+      // Вызовем toggleButtonState и передадим ей массив полей и кнопку
+      toggleButtonState(inputList, buttonElement);
+    });
+  });
+};
+
+const enableValidation = () => {
+  // Находим все формы с указанным классом в DOM, делаем из них массив
+  const formList = Array.from(document.querySelectorAll('.form'));
+  // Переберём полученную коллекцию
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', (evt) => {
+      // На каждой форме сбросим дефолты
+      evt.preventDefault();
+    });
+    // Для каждой формы вызовем setEventListeners,передав ей элемент формы.
+    setEventListeners(formElement);
+  });
+};
+// Вызовем функцию
+enableValidation();
+
+//========   Валидация. Вариант 2  ====  Отдельно для аватарки   ======
+
+// const formElement = document.querySelector('.form-avatar');
+// const inputElement = formElement.querySelector('.form__input-avatar');
+// const fieldsetElement = formElement.querySelector('.form__set-avatar');
+// const buttonElement = formElement.querySelector('.button-avatar');
+// console.log(formElement, inputElement, fieldsetElement, buttonElement);
+
+// const formError = formElement.querySelector(`.${inputElement.id}-error`);
+// console.log(inputElement.id);
+
+// formElement.addEventListener('submit', function (evt) {
+//   evt.preventDefault();
+// });
+// inputElement.addEventListener('input', function (evt) {
+//   console.log(evt.target.validity.valid);
+// });
+
+// const showInputError = (element) => {
+//   element.classList.add('form__input_type_error');
+//   formError.classList.add('form__input-error_active');
+// };
+
+// const hideInputError = (element) => {
+//     element.classList.remove('form__input_type_error');
+//     errorElement.classList.remove('form__input-error_active');
+// };
+
+// const isValid = () => {
+//   if (!inputElement.validity.valid) {
+//     showInputError(inputElement);
+//   } else {
+//     hideInputError(inputElement);
+//   }
+// };
+
+// formElement.addEventListener('submit', function (evt) {
+//   evt.preventDefault();
+// });
+
+// inputElement.addEventListener('input', isValid);

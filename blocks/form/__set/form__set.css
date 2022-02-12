@@ -1,4 +1,4 @@
-.form__cells {
+.form__set {
   margin: 0;
   padding: 0;
   width: 358px;
@@ -6,7 +6,7 @@
   border: 0;
 }
 @media (max-width: 901px) {
-  .form__cells {
+  .form__set {
     width: 84%;
     /* margin: 0; */
   }

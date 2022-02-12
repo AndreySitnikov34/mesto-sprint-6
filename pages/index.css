@@ -14,6 +14,7 @@
 @import url(../blocks/user/__name/user__name.css);
 @import url(../blocks/user/__about/user__about.css);
 @import url(../blocks/button/button.css);
+@import url(../blocks/button/button_inactive.css);
 @import url(../blocks/user/__info-edit-button/user__info-edit-button.css);
 @import url(../blocks/user/__add/user__add.css);
 @import url(../blocks/card/__add-button/card__add-button.css);
@@ -38,6 +39,9 @@
 @import url(../blocks/popup/__image/popup__image-alt.css);
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__heading/form__heading.css);
-@import url(../blocks/form/__cells/form__cells.css);
-@import url(../blocks/form/__cell/form__cell.css);
-@import url(../blocks/form/__submit-button/form__submit-button.css);
+@import url(../blocks/form/__set/form__set.css);
+@import url(../blocks/form/__input/form__input.css);
+@import url(../blocks/form/__input/_type/form__input_type_error.css);
+@import url(../blocks/form/__input-error/form__input-error.css);
+@import url(../blocks/form/__input-error/form__input-error_active.css);
+@import url(../blocks/form/__submit/form__submit.css);
