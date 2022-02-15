@@ -1,6 +1,6 @@
 const popupFormUser = document.querySelector('.popup-form-user');
 const popupFormAvatar = document.querySelector('.popup-form-avatar');
-const avatarLink = document.querySelector('#url-input');
+const avatarLink = document.querySelector('#url-input-avatar');
 const formUserNameInput = popupFormUser.querySelector('#name-input');
 const formUserAboutInput = popupFormUser.querySelector('#job-input');
 const userName = document.querySelector('.user__name');
@@ -9,7 +9,7 @@ const userPic = document.querySelector('.user__pic');
 const cardTemplate = document.querySelector('#card').content;
 const cardFormPopup = document.querySelector('.popup-form-card');
 const titleInputCard = document.querySelector('#text-input');
-const linkInputCard = document.querySelector('#url-input');
+const linkInputCard = document.querySelector('#url-input-card');
 const cards = document.querySelector('.content');
 const popupImage = document.querySelector('.popup-image');
 const imageOpen = document.querySelector('.popup__image');
@@ -246,16 +246,20 @@ cardFormPopup.addEventListener('submit', handleOpenCardPopup);
 
 const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+    console.log("249", inputElement.id);
     inputElement.classList.add('form__input_type_error');
     errorElement.textContent = errorMessage;
+    // console.log(textContent);
     errorElement.classList.add('form__input-error_active');
 };
 
 const hideInputError = (formElement, inputElement) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+    console.log("258", inputElement.id);
     inputElement.classList.remove('form__input_type_error');
-    errorElement.classList.remove('form__input-error_active');
     errorElement.textContent = '';
+    console.log("261", errorElement);
+    errorElement.classList.remove('form__input-error_active');
 };
 
 const isValid = (formElement, inputElement) => {
@@ -263,12 +267,14 @@ const isValid = (formElement, inputElement) => {
     showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
     hideInputError(formElement, inputElement);
+    console.log("269", formElement, inputElement);
   }
 };
 
 const hasInvalidInput = (inputList) => {
   // Шаримся по массиву методом some в поисках валидности
-  return inputList.some((inputElement) => {
+  return inputList.some((inputElement) => {  
+    console.log(inputElement.validity.valid);
     // Если поле не валидно, колбэк вернёт true
     return !inputElement.validity.valid;
   })
@@ -276,28 +282,33 @@ const hasInvalidInput = (inputList) => {
 
 const toggleButtonState = (inputList, buttonElement) => {
   // Если есть хотя бы один невалидный инпут
-  if (hasInvalidInput(inputList)) {
-    // добавить кнопке класс неактивности
+  const isInputValid = hasInvalidInput(inputList);
+  if (isInputValid) {
     buttonElement.classList.add('form__submit_inactive');
+    console.log('Кнопка submit НЕ АКТИВНА', buttonElement, inputList);
   } else {
-    // иначе сделай кнопку активной
     buttonElement.classList.remove('form__submit_inactive');
+    console.log('Кнопка submit активна', buttonElement, inputList);
   }
 };
 
 const setEventListeners = (formElement) => {
+    // console.log("296!", formElement);
   // Находим ВСЕ поля внутри формы, делаем из них массив методом Array.from
   const inputList = Array.from(formElement.querySelectorAll('.form__input'));
+//   console.log("299!!", inputList);
   const buttonElement = formElement.querySelector('.form__submit');
+//   console.log("301!!!", buttonElement);
     // Вызовем toggleButtonState, чтобы не ждать ввода данных в поля
   toggleButtonState(inputList, buttonElement);
-
   // Обходм все элементы полученной коллекции
   inputList.forEach((inputElement) => {
+    //   console.log("306!!!", inputElement);
     // каждому полю добавляем обработчик события input
     inputElement.addEventListener('input', () => {
       // Внутри колбэка вызываем isValid, передав ей форму и проверяемый элемент
       isValid(formElement, inputElement);
+      console.log("311", formElement, inputElement);
       // Вызовем toggleButtonState и передадим ей массив полей и кнопку
       toggleButtonState(inputList, buttonElement);
     });
@@ -335,6 +346,7 @@ enableValidation();
 //   evt.preventDefault();
 // });
 // inputElement.addEventListener('input', function (evt) {
+    
 //   console.log(evt.target.validity.valid);
 // });
 
@@ -349,6 +361,7 @@ enableValidation();
 // };
 
 // const isValid = () => {
+//     console.log(inputElement.validity.valid);
 //   if (!inputElement.validity.valid) {
 //     showInputError(inputElement);
 //   } else {
