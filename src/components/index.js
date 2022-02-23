@@ -2,15 +2,17 @@ import "./../index.css";
 import {
   showInputError,
   hideInputError,
+  checkInputValidity,
   isValid,
   hasInvalidInput,
   toggleButtonState,
   setEventListeners,
+  clearErrorMessage,
   enableValidation,
 } from "../components/validate.js";
 
 import { initialCards } from "../components/card.js";
-// import { enableValidation } from "../components/validate.js";
+
 // import { Modal } from "../components/modal.js";
 
 import {
@@ -70,7 +72,14 @@ function setContent() {
 setContent();
 
 function openAvatarPopup() {
+  const inputList = Array.from(popupFormAvatar.querySelectorAll("input"));
+  const buttonElement = popupFormAvatar.querySelector(".button-avatar");
+  // const inputElement = popupFormAvatar.querySelector(".url-input-avatar-error");
+  avatarLink.value = avatarLink.defaultValue; //Сбросить значения input
   openPopup(popupFormAvatar);
+  // clearErrorMessage(inputElement);
+  hasInvalidInput(inputList);
+  toggleButtonState(inputList, buttonElement);
 }
 
 // Функция обработки смены аватара
@@ -89,6 +98,8 @@ function handleSubmitProfile(evt) {
 }
 
 function openProfilePopup() {
+  // userName.textContent = formUserNameInput.value; // Присвоить name значение из формы
+  // userAbout.textContent = formUserAboutInput.value; // Присвоить about значение из формы
   openPopup(popupFormUser);
 }
 
@@ -105,6 +116,8 @@ function handleOpenCardPopup(evt) {
 }
 
 function openCardPopup() {
+  titleInputCard.value = titleInputCard.defaultValue;
+  linkInputCard.value = linkInputCard.defaultValue;
   openPopup(cardFormPopup);
 }
 

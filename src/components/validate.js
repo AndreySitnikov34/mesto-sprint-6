@@ -12,6 +12,14 @@ export const hideInputError = (formElement, inputElement) => {
   errorElement.classList.remove("form__input-error_active");
 };
 
+export const checkInputValidity = (formElement, inputElement) => {
+  if (!formElement.validity.valid) {
+    showInputError(formElement, inputElement, errorMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+};
+
 export const isValid = (formElement, inputElement) => {
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage);
@@ -56,6 +64,14 @@ export const setEventListeners = (formElement) => {
       toggleButtonState(inputList, buttonElement);
     });
   });
+};
+
+//Функция очистки спанов после клика на кнопку
+export const clearErrorMessage = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  errorElement.forEach((mistake) =>
+    mistake.classList.remove("form__input-error_active")
+  );
 };
 
 export const enableValidation = () => {
