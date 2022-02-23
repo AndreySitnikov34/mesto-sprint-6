@@ -1,18 +1,18 @@
-const showInputError = (formElement, inputElement, errorMessage) => {
+export const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add("form__input_type_error");
   errorElement.textContent = errorMessage;
   errorElement.classList.add("form__input-error_active");
 };
 
-const hideInputError = (formElement, inputElement) => {
+export const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove("form__input_type_error");
   errorElement.textContent = "";
   errorElement.classList.remove("form__input-error_active");
 };
 
-const isValid = (formElement, inputElement) => {
+export const isValid = (formElement, inputElement) => {
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
@@ -20,7 +20,7 @@ const isValid = (formElement, inputElement) => {
   }
 };
 
-const hasInvalidInput = (inputList) => {
+export const hasInvalidInput = (inputList) => {
   // Шаримся по массиву методом some в поисках валидности
   return inputList.some((inputElement) => {
     // Если поле не валидно, колбэк вернёт true
@@ -28,7 +28,7 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-const toggleButtonState = (inputList, buttonElement) => {
+export const toggleButtonState = (inputList, buttonElement) => {
   // Если есть хотя бы один невалидный инпут
   const isInputValid = hasInvalidInput(inputList);
   if (isInputValid) {
@@ -40,7 +40,7 @@ const toggleButtonState = (inputList, buttonElement) => {
   }
 };
 
-const setEventListeners = (formElement) => {
+export const setEventListeners = (formElement) => {
   // Находим ВСЕ поля внутри формы, делаем из них массив методом Array.from
   const inputList = Array.from(formElement.querySelectorAll(".form__input"));
   const buttonElement = formElement.querySelector(".form__submit");
@@ -58,7 +58,7 @@ const setEventListeners = (formElement) => {
   });
 };
 
-const enableValidation = () => {
+export const enableValidation = () => {
   // Находим все формы с указанным классом в DOM, делаем из них массив
   const formList = Array.from(document.querySelectorAll(".form"));
   // Переберём полученную коллекцию
@@ -71,7 +71,3 @@ const enableValidation = () => {
     setEventListeners(formElement);
   });
 };
-// Вызовем функцию
-enableValidation();
-
-export default validate;

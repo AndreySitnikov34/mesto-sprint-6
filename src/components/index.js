@@ -1,245 +1,279 @@
 import "./../index.css";
-import "../components/utils.js";
-import "../components/validate.js";
-import "../components/modal.js";
-import "../components/card.js";
+import {
+  showInputError,
+  hideInputError,
+  isValid,
+  hasInvalidInput,
+  toggleButtonState,
+  setEventListeners,
+  enableValidation,
+} from "../components/validate.js";
 
-const mesto = new URL("./../images/mesto.svg", import.meta.url);
-const JCousteau = new URL("./../images/JCousteau.png", import.meta.url);
-const pict = [
-  { name: "Mesto", image: mesto },
-  { name: "JCousteau", image: JCousteau },
-];
+import { initialCards } from "../components/card.js";
+// import { enableValidation } from "../components/validate.js";
+// import { Modal } from "../components/modal.js";
 
-// const popupFormUser = document.querySelector(".popup-form-user");
-// const popupFormAvatar = document.querySelector(".popup-form-avatar");
-// const avatarLink = document.querySelector("#url-input-avatar");
-// const formUserNameInput = popupFormUser.querySelector("#name-input");
-// const formUserAboutInput = popupFormUser.querySelector("#job-input");
-// const userName = document.querySelector(".user__name");
-// const userAbout = document.querySelector(".user__about");
-// const userPic = document.querySelector(".user__pic");
-// const cardTemplate = document.querySelector("#card").content;
-// const cardFormPopup = document.querySelector(".popup-form-card");
-// const titleInputCard = document.querySelector("#text-input");
-// const linkInputCard = document.querySelector("#url-input-card");
-// const cards = document.querySelector(".content");
-// const popupImage = document.querySelector(".popup-image");
-// const imageOpen = document.querySelector(".popup__image");
-// const signImage = document.querySelector(".popup__image-alt");
+import {
+  popupFormUser,
+  popupFormAvatar,
+  avatarLink,
+  formUserNameInput,
+  formUserAboutInput,
+  userName,
+  userAbout,
+  userPic,
+  cardTemplate,
+  cardFormPopup,
+  titleInputCard,
+  linkInputCard,
+  cards,
+  popupImage,
+  imageOpen,
+  signImage,
+} from "../components/utils.js";
 
-// const initialCards = [
-//   {
-//     name: "Санкт-Петербург",
-//     link: "https://images.unsplash.com/photo-1597533849860-5a04a21a7b3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-//   },
-//   {
-//     name: "МОСКВА",
-//     link: "https://images.unsplash.com/photo-1613327345946-551b8ecf2afe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-//   },
-//   {
-//     name: "Волгоград",
-//     link: "https://images.unsplash.com/photo-1583917096279-3eb6e3ea978f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2564&q=80",
-//   },
-//   {
-//     name: "Архыз",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-//   },
-//   {
-//     name: "Челябинская область",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-//   },
-//   {
-//     name: "Иваново",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-//   },
-//   {
-//     name: "Камчатка",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-//   },
-//   {
-//     name: "Холмогорский район",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-//   },
-//   {
-//     name: "Байкал",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-//   },
-// ];
+//Включение валидации всех форм
+enableValidation({
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".button",
+  inactiveButtonClass: "button_inactive",
+  inputErrorClass: "form__input-error",
+  errorClass: "form__input-error_active",
+});
 
-// function createCard(card) {
-//   const cardElement = cardTemplate.cloneNode(true);
-//   cardElement.querySelector(".card__location").textContent = card.name;
-//   cardElement.querySelector(".card__img").src = card.link;
-//   cardElement.querySelector(".card__img").alt = card.name;
-//   cardElement
-//     .querySelector(".card__img")
-//     .addEventListener("click", openImagePopup);
-//   cardElement
-//     .querySelector(".card__heart")
-//     .addEventListener("click", toggleLikes);
-//   cardElement.querySelector(".card__del").addEventListener("click", removeCard);
-//   return cardElement;
-// }
+//Функция создания новой карточки
+function createCard(card) {
+  const cardElement = cardTemplate.cloneNode(true);
+  cardElement.querySelector(".card__location").textContent = card.name;
+  cardElement.querySelector(".card__img").src = card.link;
+  cardElement.querySelector(".card__img").alt = card.name;
+  cardElement
+    .querySelector(".card__img")
+    .addEventListener("click", openImagePopup);
+  cardElement
+    .querySelector(".card__heart")
+    .addEventListener("click", toggleLikes);
+  cardElement.querySelector(".card__del").addEventListener("click", removeCard);
+  return cardElement;
+}
 
-// const addCard = (card) => {
-//   const contentCard = createCard(card);
-//   cards.prepend(contentCard);
+const addCard = (card) => {
+  const contentCard = createCard(card);
+  cards.prepend(contentCard);
+};
+
+function setContent() {
+  initialCards.forEach((content) => addCard(content));
+}
+
+setContent();
+
+function openAvatarPopup() {
+  openPopup(popupFormAvatar);
+}
+
+// Функция обработки смены аватара
+function handleAvatarPopup(evt) {
+  evt.preventDefault(); // Не открывать в новом окне (сброс значений по умолчанию)
+  userPic.src = avatarLink.value; // Заменить значение src
+  closePopup(popupFormAvatar); // Закрыть попап
+}
+
+//Функция обработки профиля юзера после submit
+function handleSubmitProfile(evt) {
+  evt.preventDefault(); // Не открывать в новом окне
+  userName.textContent = formUserNameInput.value; // Присвоить name значение из формы
+  userAbout.textContent = formUserAboutInput.value; // Присвоить about значение из формы
+  closePopup(popupFormUser); // Закрыть попап
+}
+
+function openProfilePopup() {
+  openPopup(popupFormUser);
+}
+
+// Функция обработки создания новой карточки
+function handleOpenCardPopup(evt) {
+  evt.preventDefault(); // Не открывать в новом окне
+  addCard({
+    name: titleInputCard.value,
+    link: linkInputCard.value,
+  });
+  titleInputCard.value = "";
+  linkInputCard.value = "";
+  closePopup(cardFormPopup); // Закрыть попап
+}
+
+function openCardPopup() {
+  openPopup(cardFormPopup);
+}
+
+// Функция открытия картинки из карточки
+function openImagePopup(evt) {
+  imageOpen.src = "";
+  imageOpen.src = evt.target.src;
+  imageOpen.alt = evt.target.alt;
+  signImage.textContent = evt.target.alt;
+  openPopup(popupImage);
+}
+
+function removeCard(evt) {
+  evt.target.parentNode.remove();
+}
+
+function toggleLikes(evt) {
+  evt.target.classList.toggle("card__heart_liked");
+}
+
+// Функция открытия попапа
+function openPopup(popup) {
+  popup.classList.add("popup_opened");
+}
+
+// Функция закрытия попапа
+function closePopup(popup) {
+  popup.classList.remove("popup_opened");
+}
+
+// Функция закрытия попапа по Escape
+window.addEventListener("keydown", closePopEsc);
+function closePopEsc(key) {
+  if (key.key === "Escape") {
+    const pup = document.querySelectorAll(".popup");
+    pup.forEach((popup) => {
+      closePopup(popup);
+    });
+  }
+}
+
+// Функция закрытия попапа FormAvatar по клику вне попапа
+function closeFormAvatar(popup) {
+  popup.addEventListener("click", (evt) => {
+    if (evt.target === popupFormAvatar) {
+      closePopup(popup);
+    } else {
+      return;
+    }
+  });
+}
+
+closeFormAvatar(popupFormAvatar);
+
+// Функция закрытия попапа FormUser по клику вне попапа
+function closeFormUser(popup) {
+  popup.addEventListener("click", (evt) => {
+    if (evt.target === popupFormUser) {
+      closePopup(popup);
+    } else {
+      return;
+    }
+  });
+}
+
+closeFormUser(popupFormUser);
+
+// Функция закрытия попапа добавления карточки по клику вне попапа
+function closeFormAddCard(popup) {
+  popup.addEventListener("click", (evt) => {
+    if (evt.target === cardFormPopup) {
+      closePopup(popup);
+    } else {
+      return;
+    }
+  });
+}
+
+closeFormAddCard(cardFormPopup);
+
+// Функция закрытия попапа фото по клику вне фото
+function closeFoto(popup) {
+  popup.addEventListener("click", (evt) => {
+    if (evt.target === popupImage) {
+      closePopup(popup);
+    } else {
+      return;
+    }
+  });
+}
+
+closeFoto(popupImage);
+
+document
+  .querySelector(".user__overlay")
+  .addEventListener("click", openAvatarPopup);
+document
+  .querySelector(".card__add-button")
+  .addEventListener("click", openCardPopup);
+document
+  .querySelector(".user__info-edit-button")
+  .addEventListener("click", openProfilePopup);
+document.querySelectorAll(".popup__button-close").forEach((element) => {
+  const popup = element.closest(".popup");
+  element.addEventListener("click", () => closePopup(popup));
+});
+
+popupFormAvatar.addEventListener("submit", handleAvatarPopup);
+popupFormUser.addEventListener("submit", handleSubmitProfile);
+cardFormPopup.addEventListener("submit", handleOpenCardPopup);
+
+// enableValidation();
+
+// const isValid = (formElement, inputElement) => {
+//   if (!inputElement.validity.valid) {
+//     showInputError(formElement, inputElement, inputElement.validationMessage);
+//   } else {
+//     hideInputError(formElement, inputElement);
+//   }
 // };
 
-// function setContent() {
-//   initialCards.forEach((content) => addCard(content));
-// }
-
-// setContent();
-
-// function openAvatarPopup() {
-//   openPopup(popupFormAvatar);
-// }
-
-// function handleAvatarPopup(evt) {
-//   // Функция обработки смены аватара
-//   evt.preventDefault(); // Не открывать в новом окне (сброс значений по умолчанию)
-//   userPic.src = avatarLink.value; // Заменить значение src
-//   closePopup(popupFormAvatar); // Закрыть попап
-// }
-
-// function handleSubmitProfile(evt) {
-//   //Функция обработки профиля юзера после submit
-//   evt.preventDefault(); // Не открывать в новом окне
-//   userName.textContent = formUserNameInput.value; // Присвоить name значение из формы
-//   userAbout.textContent = formUserAboutInput.value; // Присвоить about значение из формы
-//   closePopup(popupFormUser); // Закрыть попап
-// }
-
-// function openProfilePopup() {
-//   openPopup(popupFormUser);
-// }
-
-// function handleOpenCardPopup(evt) {
-//   // Функция обработки создания новой карточки
-//   evt.preventDefault(); // Не открывать в новом окне
-//   addCard({
-//     name: titleInputCard.value,
-//     link: linkInputCard.value,
+// export const hasInvalidInput = (inputList) => {
+//   // Шаримся по массиву методом some в поисках валидности
+//   return inputList.some((inputElement) => {
+//     // Если поле не валидно, колбэк вернёт true
+//     return !inputElement.validity.valid;
 //   });
-//   titleInputCard.value = "";
-//   linkInputCard.value = "";
-//   closePopup(cardFormPopup); // Закрыть попап
-// }
+// };
 
-// function openCardPopup() {
-//   openPopup(cardFormPopup);
-// }
-
-// function openImagePopup(evt) {
-//   imageOpen.src = "";
-//   imageOpen.src = evt.target.src;
-//   imageOpen.alt = evt.target.alt;
-//   signImage.textContent = evt.target.alt;
-//   openPopup(popupImage);
-// }
-
-// function removeCard(evt) {
-//   evt.target.parentNode.remove();
-// }
-
-// function toggleLikes(evt) {
-//   evt.target.classList.toggle("card__heart_liked");
-// }
-
-// function openPopup(popup) {
-//   popup.classList.add("popup_opened");
-// }
-
-// // Функция закрытия попапа
-
-// function closePopup(popup) {
-//   popup.classList.remove("popup_opened");
-// }
-
-// // Функция закрытия попапа по Escape
-
-// window.addEventListener("keydown", closePopEsc);
-// function closePopEsc(key) {
-//   if (key.key === "Escape") {
-//     const pup = document.querySelectorAll(".popup");
-//     pup.forEach((popup) => {
-//       closePopup(popup);
-//     });
+// export const toggleButtonState = (inputList, buttonElement) => {
+//   // Если есть хотя бы один невалидный инпут
+//   const isInputValid = hasInvalidInput(inputList);
+//   if (isInputValid) {
+//     buttonElement.classList.add("form__submit_inactive");
+//     // console.log('Кнопка submit НЕ АКТИВНА', buttonElement, inputList);
+//   } else {
+//     buttonElement.classList.remove("form__submit_inactive");
+//     // console.log('Кнопка submit активна', buttonElement, inputList);
 //   }
-// }
+// };
 
-// // Функция закрытия попапа FormAvatar по клику вне попапа
-
-// function closeFormAvatar(popup) {
-//   popup.addEventListener("click", (evt) => {
-//     if (evt.target === popupFormAvatar) {
-//       closePopup(popup);
-//     } else {
-//       return;
-//     }
+// export const setEventListeners = (formElement) => {
+//   // Находим ВСЕ поля внутри формы, делаем из них массив методом Array.from
+//   const inputList = Array.from(formElement.querySelectorAll(".form__input"));
+//   const buttonElement = formElement.querySelector(".form__submit");
+//   // Вызовем toggleButtonState, чтобы не ждать ввода данных в поля
+//   toggleButtonState(inputList, buttonElement);
+//   // Обходм все элементы полученной коллекции
+//   inputList.forEach((inputElement) => {
+//     // каждому полю добавляем обработчик события input
+//     inputElement.addEventListener("input", () => {
+//       // Внутри колбэка вызываем isValid, передав ей форму и проверяемый элемент
+//       isValid(formElement, inputElement);
+//       // Вызовем toggleButtonState и передадим ей массив полей и кнопку
+//       toggleButtonState(inputList, buttonElement);
+//     });
 //   });
-// }
+// };
 
-// closeFormAvatar(popupFormAvatar);
-
-// // Функция закрытия попапа FormUser по клику вне попапа
-
-// function closeFormUser(popup) {
-//   popup.addEventListener("click", (evt) => {
-//     if (evt.target === popupFormUser) {
-//       closePopup(popup);
-//     } else {
-//       return;
-//     }
+// export const enableValidation = () => {
+//   // Находим все формы с указанным классом в DOM, делаем из них массив
+//   const formList = Array.from(document.querySelectorAll(".form"));
+//   // Переберём полученную коллекцию
+//   formList.forEach((formElement) => {
+//     formElement.addEventListener("submit", (evt) => {
+//       // На каждой форме сбросим дефолты
+//       evt.preventDefault();
+//     });
+//     // Для каждой формы вызовем setEventListeners,передав ей элемент формы.
+//     setEventListeners(formElement);
 //   });
-// }
-
-// closeFormUser(popupFormUser);
-
-// // Функция закрытия попапа добавления карточки по клику вне попапа
-
-// function closeFormAddCard(popup) {
-//   popup.addEventListener("click", (evt) => {
-//     if (evt.target === cardFormPopup) {
-//       closePopup(popup);
-//     } else {
-//       return;
-//     }
-//   });
-// }
-
-// closeFormAddCard(cardFormPopup);
-
-// // Функция закрытия попапа фото по клику вне фото
-
-// function closeFoto(popup) {
-//   popup.addEventListener("click", (evt) => {
-//     if (evt.target === popupImage) {
-//       closePopup(popup);
-//     } else {
-//       return;
-//     }
-//   });
-// }
-
-// closeFoto(popupImage);
-
-// document
-//   .querySelector(".user__overlay")
-//   .addEventListener("click", openAvatarPopup);
-// document
-//   .querySelector(".card__add-button")
-//   .addEventListener("click", openCardPopup);
-// document
-//   .querySelector(".user__info-edit-button")
-//   .addEventListener("click", openProfilePopup);
-// document.querySelectorAll(".popup__button-close").forEach((element) => {
-//   const popup = element.closest(".popup");
-//   element.addEventListener("click", () => closePopup(popup));
-// });
-
-// popupFormAvatar.addEventListener("submit", handleAvatarPopup);
-// popupFormUser.addEventListener("submit", handleSubmitProfile);
-// cardFormPopup.addEventListener("submit", handleOpenCardPopup);
+// };
