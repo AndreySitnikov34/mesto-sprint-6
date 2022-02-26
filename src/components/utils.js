@@ -1,16 +1,34 @@
-export const popupFormUser = document.querySelector(".popup-form-user");
-export const popupFormAvatar = document.querySelector(".popup-form-avatar");
-export const avatarLink = document.querySelector("#url-input-avatar");
-export const formUserNameInput = popupFormUser.querySelector("#name-input");
-export const formUserAboutInput = popupFormUser.querySelector("#job-input");
-export const userName = document.querySelector(".user__name");
-export const userAbout = document.querySelector(".user__about");
-export const userPic = document.querySelector(".user__pic");
-export const cardTemplate = document.querySelector("#card").content;
-export const cardFormPopup = document.querySelector(".popup-form-card");
-export const titleInputCard = document.querySelector("#text-input");
-export const linkInputCard = document.querySelector("#url-input-card");
-export const cards = document.querySelector(".content");
-export const popupImage = document.querySelector(".popup-image");
-export const imageOpen = document.querySelector(".popup__image");
-export const signImage = document.querySelector(".popup__image-alt");
+// Функция открытия попапа
+export function openPopup(popup) {
+  popup.classList.add("popup_opened");
+  document.addEventListener("keydown", closePopEsc);
+}
+
+// Функция закрытия попапа
+export function closePopup(popup) {
+  popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closePopEsc);
+}
+
+//Функция (с подсказки BG-review) закрытия ЛЮБЫХ попапов
+//по клику на крестик или оверлей
+export const popups = document.querySelectorAll(".popup");
+
+popups.forEach((popup) => {
+  popup.addEventListener("mousedown", (evt) => {
+    if (evt.target.classList.contains("popup_opened")) {
+      closePopup(popup);
+    }
+    if (evt.target.classList.contains("popup__close")) {
+      closePopup(popup);
+    }
+  });
+});
+
+//Функция закрытия попапа по Escape
+export function closePopEsc(key) {
+  const popup = document.querySelector(".popup_opened");
+  if (key.key === "Escape") {
+    closePopup(popup);
+  }
+}
