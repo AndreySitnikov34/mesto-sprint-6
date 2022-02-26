@@ -66,6 +66,7 @@ enableValidation({
 function setContent() {
   initialCards.forEach((content) => addCard(content));
 }
+
 setContent();
 
 document

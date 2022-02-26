@@ -27,21 +27,23 @@ import {
 } from "../components/utils.js";
 
 function openAvatarPopup() {
-  const inputList = Array.from(popupFormAvatar.querySelectorAll("input"));
-  const buttonElement = popupFormAvatar.querySelector(".button-avatar");
+  const avatarInput = Array.from(popupFormAvatar.querySelectorAll("input"));
+  const avatarSubmitButton = popupFormAvatar.querySelector(".button-avatar");
   // const inputElement = popupFormAvatar.querySelector(".url-input-avatar-error");
   avatarLink.value = avatarLink.defaultValue; //Сбросить значения input
-  openPopup(document.querySelector(".popup-form-avatar"));
+  // openPopup(document.querySelector(".popup-form-avatar"));
+  openPopup(popupFormAvatar);
   // clearErrorMessage();
-  hasInvalidInput(inputList);
-  toggleButtonState(inputList, buttonElement);
+  hasInvalidInput(avatarInput);
+  toggleButtonState(avatarInput, avatarSubmitButton);
 }
 
 // Функция обработки смены аватара
 function handleAvatarPopup(evt) {
   evt.preventDefault(); // Не открывать в новом окне (сброс значений по умолчанию)
   userPic.src = avatarLink.value; // Заменить значение src
-  closePopup(document.querySelector(".popup-form-avatar")); // Закрыть попап
+  // closePopup(document.querySelector(".popup-form-avatar")); // Закрыть попап
+  closePopup(popupFormAvatar);
 }
 
 //Функция обработки профиля юзера после submit
@@ -60,6 +62,8 @@ function openProfilePopup() {
 
 // Функция обработки создания новой карточки
 function handleOpenCardPopup(evt) {
+  const inputList = Array.from(cardFormPopup.querySelectorAll("input"));
+  const buttonElement = cardFormPopup.querySelector(".form__submit");
   evt.preventDefault(); // Не открывать в новом окне
   addCard({
     name: titleInputCard.value,
@@ -68,6 +72,8 @@ function handleOpenCardPopup(evt) {
   titleInputCard.value = "";
   linkInputCard.value = "";
   closePopup(cardFormPopup); // Закрыть попап
+  hasInvalidInput(inputList);
+  toggleButtonState(inputList, buttonElement);
 }
 
 function openCardPopup() {
@@ -92,16 +98,16 @@ function openImagePopup(evt) {
 //Функция создания новой карточки
 function createCard(card) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  cardElement.querySelector(".card__location").textContent = card.name;
-  cardElement.querySelector(".card__img").src = card.link;
-  cardElement.querySelector(".card__img").alt = card.name;
-  cardElement
-    .querySelector(".card__img")
-    .addEventListener("click", openImagePopup);
-  cardElement
-    .querySelector(".card__heart")
-    .addEventListener("click", toggleLikes);
-  cardElement.querySelector(".card__del").addEventListener("click", removeCard);
+  const cardImage = cardElement.querySelector(".card__img");
+  const cardLike = cardElement.querySelector(".card__heart");
+  const cardDelete = cardElement.querySelector(".card__del");
+  const cardLocation = cardElement.querySelector(".card__location");
+  cardLocation.textContent = card.name;
+  cardImage.src = card.link;
+  cardImage.alt = card.name;
+  cardImage.addEventListener("click", openImagePopup);
+  cardLike.addEventListener("click", toggleLikes);
+  cardDelete.addEventListener("click", removeCard);
   return cardElement;
 }
 const addCard = (card) => {
