@@ -33,7 +33,7 @@ import {
 function openAvatarPopup() {
   avatarLink.value = ""; //Сбросить значения input
   openPopup(popupFormAvatar);
-  toggleButtonState(cardInputs, avatarSubmitButton);
+  toggleButtonState(cardInputs, avatarSubmitButton, "form__submit_inactive");
 }
 
 // Функция обработки смены аватара
@@ -64,7 +64,7 @@ function handleCardFormSubmit(evt) {
   });
   evt.target.reset();
   closePopup(cardFormPopup);
-  toggleButtonState(cardInputs, cardSubmitButton);
+  toggleButtonState(cardInputs, cardSubmitButton, "form__submit_inactive");
 }
 
 function openCardPopup() {
