@@ -6,7 +6,7 @@ export const showInputError = (
   { inputErrorClass, errorClass }
 ) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add(inputErrorClass);
+  // inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
 };
@@ -17,7 +17,7 @@ export const hideInputError = (
   { inputErrorClass, errorClass }
 ) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(inputErrorClass);
+  // inputElement.classList.remove(inputErrorClass);
   errorElement.textContent = "";
   errorElement.classList.remove(errorClass);
 };
@@ -51,13 +51,13 @@ export const toggleButtonState = (
   // Если есть хотя бы один невалидный инпут
   const isInputValid = hasInvalidInput(inputList);
   if (isInputValid) {
-    buttonElement.classList.add(inactiveButtonClass); //Покрасить в другой
+    buttonElement.classList.add(inactiveButtonClass); //Покрасить в другой цвет
     buttonElement.disabled = true; //Деактиватор кнопки
-    // console.log('Кнопка submit НЕ АКТИВНА', buttonElement, inputList);
+    // console.log("Кнопка submit НЕ АКТИВНА", buttonElement, inputList);
   } else {
     buttonElement.classList.remove(inactiveButtonClass);
     buttonElement.disabled = false;
-    // console.log('Кнопка submit активна', buttonElement, inputList);
+    // console.log("Кнопка submit активна", buttonElement, inputList);
   }
 };
 

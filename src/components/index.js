@@ -18,7 +18,7 @@ import {
   handleAvatarPopup,
   handleSubmitProfile,
   openProfilePopup,
-  handleOpenCardPopup,
+  handleCardFormSubmit,
   openCardPopup,
   openImagePopup,
   createCard,
@@ -79,11 +79,6 @@ document
   .querySelector(".user__info-edit-button")
   .addEventListener("click", openProfilePopup);
 
-document.querySelectorAll(".popup__button-close").forEach((element) => {
-  const popup = element.closest(".popup");
-  element.addEventListener("click", () => closePopup(popup));
-});
-
 popupFormAvatar.addEventListener("submit", handleAvatarPopup);
 popupFormUser.addEventListener("submit", handleSubmitProfile);
-cardFormPopup.addEventListener("submit", handleOpenCardPopup);
+cardFormPopup.addEventListener("submit", handleCardFormSubmit);

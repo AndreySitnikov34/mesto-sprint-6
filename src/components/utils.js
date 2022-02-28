@@ -27,8 +27,8 @@ popups.forEach((popup) => {
 
 //Функция закрытия попапа по Escape
 export function closePopEsc(key) {
-  const popup = document.querySelector(".popup_opened");
   if (key.key === "Escape") {
+    const popup = document.querySelector(".popup_opened");
     closePopup(popup);
   }
 }

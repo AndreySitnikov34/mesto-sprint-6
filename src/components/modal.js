@@ -1,3 +1,7 @@
+const cardInputs = Array.from(cardFormPopup.querySelectorAll("input"));
+const avatarSubmitButton = popupFormAvatar.querySelector(".button-avatar");
+const cardSubmitButton = cardFormPopup.querySelector(".form__submit");
+
 import {
   popupFormUser,
   popupFormAvatar,
@@ -27,22 +31,15 @@ import {
 } from "../components/utils.js";
 
 function openAvatarPopup() {
-  const avatarInput = Array.from(popupFormAvatar.querySelectorAll("input"));
-  const avatarSubmitButton = popupFormAvatar.querySelector(".button-avatar");
-  // const inputElement = popupFormAvatar.querySelector(".url-input-avatar-error");
-  avatarLink.value = avatarLink.defaultValue; //Сбросить значения input
-  // openPopup(document.querySelector(".popup-form-avatar"));
+  avatarLink.value = ""; //Сбросить значения input
   openPopup(popupFormAvatar);
-  // clearErrorMessage();
-  hasInvalidInput(avatarInput);
-  toggleButtonState(avatarInput, avatarSubmitButton);
+  toggleButtonState(cardInputs, avatarSubmitButton);
 }
 
 // Функция обработки смены аватара
 function handleAvatarPopup(evt) {
-  evt.preventDefault(); // Не открывать в новом окне (сброс значений по умолчанию)
+  evt.preventDefault(); // Не открывать в новом окне
   userPic.src = avatarLink.value; // Заменить значение src
-  // closePopup(document.querySelector(".popup-form-avatar")); // Закрыть попап
   closePopup(popupFormAvatar);
 }
 
@@ -55,35 +52,23 @@ function handleSubmitProfile(evt) {
 }
 
 function openProfilePopup() {
-  //   // userName.textContent = formUserNameInput.value; // Присвоить name значение из формы
-  //   // userAbout.textContent = formUserAboutInput.value; // Присвоить about значение из формы
   openPopup(popupFormUser);
 }
 
 // Функция обработки создания новой карточки
-function handleOpenCardPopup(evt) {
-  const inputList = Array.from(cardFormPopup.querySelectorAll("input"));
-  const buttonElement = cardFormPopup.querySelector(".form__submit");
-  evt.preventDefault(); // Не открывать в новом окне
+function handleCardFormSubmit(evt) {
+  evt.preventDefault();
   addCard({
     name: titleInputCard.value,
     link: linkInputCard.value,
   });
-  titleInputCard.value = "";
-  linkInputCard.value = "";
-  closePopup(cardFormPopup); // Закрыть попап
-  hasInvalidInput(inputList);
-  toggleButtonState(inputList, buttonElement);
+  evt.target.reset();
+  closePopup(cardFormPopup);
+  toggleButtonState(cardInputs, cardSubmitButton);
 }
 
 function openCardPopup() {
-  const inputList = Array.from(cardFormPopup.querySelectorAll("input"));
-  const buttonElement = cardFormPopup.querySelector(".form__submit");
-  titleInputCard.value = "";
-  linkInputCard.value = "";
   openPopup(cardFormPopup);
-  hasInvalidInput(inputList);
-  toggleButtonState(inputList, buttonElement);
 }
 
 // Функция открытия картинки из карточки
@@ -165,7 +150,7 @@ export {
   handleAvatarPopup,
   handleSubmitProfile,
   openProfilePopup,
-  handleOpenCardPopup,
+  handleCardFormSubmit,
   openCardPopup,
   openImagePopup,
   createCard,
